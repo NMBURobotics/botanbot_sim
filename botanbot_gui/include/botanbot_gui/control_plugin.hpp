@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef botanbot_GUI__CONTROL_PLUGIN_HPP_
-#define botanbot_GUI__CONTROL_PLUGIN_HPP_
+#ifndef BOTANBOT_GUI__CONTROL_PLUGIN_HPP_
+#define BOTANBOT_GUI__CONTROL_PLUGIN_HPP_
 
 
 // QT headers
@@ -143,7 +143,6 @@ protected:
   rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_publisher_;
   // QT timer to update robot states and publish velocity commands(if user is doing manual jog)
   QPointer<QTimer> timer_;
-
   // A timer used to check on the completion status of the action
   QPointer<QTimer> basic_timer_;
   // Robot controller to sent robot to goals and chek it navigation status
@@ -152,10 +151,8 @@ protected:
   std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
   // tf listner for tf transforms
   std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
-
-private:
 };
 
 }  // namespace botanbot_gui
 
-#endif  // botanbot_GUI__CONTROL_PLUGIN_HPP_
+#endif  // BOTANBOT_GUI__CONTROL_PLUGIN_HPP_

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef botanbot_GUI__ROBOT_CONTROLLER_HPP_
-#define botanbot_GUI__ROBOT_CONTROLLER_HPP_
+#ifndef BOTANBOT_GUI__ROBOT_CONTROLLER_HPP_
+#define BOTANBOT_GUI__ROBOT_CONTROLLER_HPP_
 
 // ROS2 headers
 #include <rclcpp/rclcpp.hpp>
@@ -82,4 +82,4 @@ private:
 };
 }  // namespace botanbot_gui
 
-#endif  // botanbot_GUI__ROBOT_CONTROLLER_HPP_
+#endif  // BOTANBOT_GUI__ROBOT_CONTROLLER_HPP_
