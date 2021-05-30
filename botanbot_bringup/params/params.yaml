@@ -67,7 +67,7 @@ vox_nav_controller_server_rclcpp_node:
 
 vox_nav_map_server_rclcpp_node:
   ros__parameters:
-    pcd_map_filename: ../maps/uneven_world.pcd
+    pcd_map_filename: /home/atas/colcon_ws/src/botanbot_sim/botanbot_bringup/maps/uneven_world.pcd
     pcd_map_downsample_voxel_size: 0.1 # set to smaller if you do not want downsample
     pcd_map_transform: # Apply an optional rigid-body transrom to pcd file
       translation:
