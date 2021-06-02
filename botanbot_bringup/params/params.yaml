@@ -25,7 +25,7 @@ vox_nav_planner_server_rclcpp_node:
       plugin: "vox_nav_planning::SE3Planner"        # PRMstar: Reccomended
       planner_name: "PRMstar"                       # PRMstar,LazyPRMstar,RRTstar,RRTsharp,RRTXstatic,InformedRRTstar,BITstar, 
       interpolation_parameter: 25                   # ABITstar,AITstar,CForest,LBTRRT,SST,TRRT,SPARS,SPARStwo,FMT,AnytimePathShortening
-      planner_timeout: 2.0
+      planner_timeout: 5.0
       octomap_topic: "octomap"
       octomap_voxel_size: 0.2
       state_space_boundries:
@@ -36,8 +36,8 @@ vox_nav_planner_server_rclcpp_node:
         minz: -2.0
         maxz: 12.0
       robot_body_dimens:
-        x: 1.0
-        y: 1.0
+        x: 0.8
+        y: 0.8
         z: 0.2
 
 vox_nav_controller_server_rclcpp_node:
@@ -88,8 +88,8 @@ vox_nav_map_server_rclcpp_node:
     max_allowed_tilt: 40.0                                                   # 1st Cost critic Any angle higher than this is marked as NON-traversable
     max_allowed_point_deviation: 0.2                                         # 2nd Cost critic Point deviation from plane, this could be viewed as roughness of each cell 
     max_allowed_energy_gap: 0.2                                              # 3rd Cost critic Max Energy in each cell, this is detemined by max height differnce between edge points of cell
-    node_elevation_distance: 0.8                                             # According to cell_radius, cell centers are sampled from original point cloud map, they are elevated from the original cloud
-    plane_fit_threshold: 0.2                                                 # when fitting a flan to each cell, a plane_fit_threshold is considered from plane fitting f PCL
+    node_elevation_distance: 1.0                                             # According to cell_radius, cell centers are sampled from original point cloud map, they are elevated from the original cloud
+    plane_fit_threshold: 0.1                                                 # when fitting a flan to each cell, a plane_fit_threshold is considered from plane fitting f PCL
     robot_mass: 0.1                                                          # approximate robot mass considering cell_radius
     average_speed: 1.0                                                       # average robot speed(m/s) when calcuating kinetic energy m = 0.5 * (m * pow(v,2))
     include_node_centers_in_cloud: true                                      # should cell(node) centers be included in ap ? , they will apear as yellow
