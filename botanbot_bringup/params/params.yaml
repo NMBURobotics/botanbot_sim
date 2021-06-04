@@ -1,33 +1,29 @@
 vox_nav_planner_server_rclcpp_node:
   ros__parameters:
-    planner_plugin: "SE3Planner"                  # other options: "SE2Planner", "SE3Planner"
+    planner_plugin: "SE2Planner"              # other options: "SE2Planner", "SE3Planner"
     expected_planner_frequency: 10.0
+    enabled: true
+    planner_name: "PRMstar"                   # PRMstar,LazyPRMstar,RRTstar,RRTsharp,RRTXstatic,InformedRRTstar,BITstar, 
+    interpolation_parameter: 15               # ABITstar,AITstar,CForest,LBTRRT,SST,TRRT,SPARS,SPARStwo,FMT,AnytimePathShortening
+    planner_timeout: 2.0
+    octomap_voxel_size: 0.2
+    robot_body_dimens:
+      x: 1.6
+      y: 0.9
+      z: 0.4
     SE2Planner:
       plugin: "vox_nav_planning::SE2Planner"    # CForest: Reccomended
-      planner_name: "PRMstar"                   # PRMstar,LazyPRMstar,RRTstar,RRTsharp,RRTXstatic,InformedRRTstar,BITstar, 
-      interpolation_parameter: 25               # ABITstar,AITstar,CForest,LBTRRT,SST,TRRT,SPARS,SPARStwo,FMT,AnytimePathShortening
-      planner_timeout: 2.0
-      octomap_topic: "octomap"
-      octomap_voxel_size: 0.2
-      se2_space: "SE2"                           # "DUBINS","REEDS", "SE2" ### PS. Use DUBINS OR REEDS for Ackermann
-      state_space_boundries:
+      se2_space: "DUBINS"                       # "DUBINS","REEDS", "SE2" ### PS. Use DUBINS OR REEDS for Ackermann
+      z_elevation: 1.0                          # Elevation of obot from ground plane, robot should not collide with plane                                      
+      state_space_boundries: 
         minx: -50.0
         maxx: 50.0
         miny: -50.0
         maxy: 50.0
         minyaw: -3.14
         maxyaw: 3.14
-      robot_body_dimens:
-        x: 1.5
-        y: 1.0
-        z: 0.4
     SE3Planner: 
-      plugin: "vox_nav_planning::SE3Planner"        # PRMstar: Reccomended
-      planner_name: "PRMstar"                       # PRMstar,LazyPRMstar,RRTstar,RRTsharp,RRTXstatic,InformedRRTstar,BITstar, 
-      interpolation_parameter: 25                   # ABITstar,AITstar,CForest,LBTRRT,SST,TRRT,SPARS,SPARStwo,FMT,AnytimePathShortening
-      planner_timeout: 5.0
-      octomap_topic: "octomap"
-      octomap_voxel_size: 0.2
+      plugin: "vox_nav_planning::SE3Planner"    # PRMstar: Reccomended
       state_space_boundries:
         minx: -50.0
         maxx: 50.0
@@ -35,10 +31,6 @@ vox_nav_planner_server_rclcpp_node:
         maxy: 50.0
         minz: -2.0
         maxz: 12.0
-      robot_body_dimens:
-        x: 0.8
-        y: 0.8
-        z: 0.2
 
 vox_nav_controller_server_rclcpp_node:
    ros__parameters:

@@ -7,7 +7,7 @@
         <visual>
             <origin xyz="-0.019375 0.005287 0.340756" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/base.stl"/>
+                <mesh filename="package://botanbot_description/meshes/base_simplified.stl"/>
             </geometry>
             <material name="Cyan">
                 <color rgba="0 1.0 1.0 1.0" />
@@ -16,7 +16,7 @@
         <collision>
             <origin xyz="-0.019375 0.005287 0.340756" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/base.stl"/>
+                <mesh filename="package://botanbot_description/meshes/base_simplified.stl"/>
             </geometry>
         </collision>
     </link>
@@ -24,7 +24,7 @@
         <visual name='visual'>
             <origin xyz="0 0 0" rpy="1.57 0 0" />
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="0.5 0.5 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="0.5 0.5 1" />
             </geometry>
             <material name="Red">
                 <color rgba="1.0 0 0 0.6" />
@@ -32,7 +32,7 @@
         </visual>
         <collision name='collision'>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="0.5 0.5 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="0.5 0.5 1" />
             </geometry>
         </collision>
     </link>
@@ -40,7 +40,7 @@
         <visual name='visual'>
             <origin xyz="0 0 0" rpy="0 0 1.57" />
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="1 1 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="1 1 1" />
             </geometry>
             <material name="Red">
                 <color rgba="1.0 0 0 0.6" />
@@ -48,7 +48,7 @@
         </visual>
         <collision name='collision'>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="1 1 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="1 1 1" />
             </geometry>
         </collision>
     </link>
@@ -56,7 +56,7 @@
         <visual name='visual'>
             <origin xyz="0 0 0" rpy="0 0 1.57" />
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="1 1 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="1 1 1" />
             </geometry>
             <material name="Red">
                 <color rgba="1.0 0 0 0.6" />
@@ -64,7 +64,7 @@
         </visual>
         <collision name='collision'>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="1 1 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="1 1 1" />
             </geometry>
         </collision>
     </link>
@@ -72,7 +72,7 @@
         <visual name='visual'>
             <origin xyz="0 0 0" rpy="0 0 1.57" />
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="1 1 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="1 1 1" />
             </geometry>
             <material name="Red">
                 <color rgba="1.0 0 0 0.6" />
@@ -80,7 +80,7 @@
         </visual>
         <collision name='collision'>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="1 1 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="1 1 1" />
             </geometry>
         </collision>
     </link>
@@ -88,7 +88,7 @@
         <visual name='visual'>
             <origin xyz="0 0 0" rpy="0 0 1.57" />
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="1 1 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="1 1 1" />
             </geometry>
             <material name="Red">
                 <color rgba="1.0 0 0 0.6" />
@@ -96,7 +96,7 @@
         </visual>
         <collision name='collision'>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/wheel.stl" scale="1 1 1" />
+                <mesh filename="package://botanbot_description/meshes/wheel_simplified.stl" scale="1 1 1" />
             </geometry>
         </collision>
     </link>
