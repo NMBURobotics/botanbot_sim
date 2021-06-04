@@ -1,4 +1,4 @@
-material ground_mountain/ground_mountain
+material ground_uneven/ground_uneven
 {
   receive_shadows off
   technique

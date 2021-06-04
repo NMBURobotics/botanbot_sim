@@ -60,7 +60,7 @@
         </plugin>
         <include>
             <pose>0 0 0 0 0 0 </pose>
-            <uri>model://ground_mountain</uri>
+            <uri>model://ground_uneven</uri>
         </include>
         <gravity>0 0 -9.8</gravity>
         <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
@@ -3041,7 +3041,7 @@
                     <wrench>0 0 0 0 -0 0</wrench>
                 </link>
             </model>
-            <model name='ground_mountain'>
+            <model name='ground_uneven'>
                 <pose>0 0 0 0 -0 0</pose>
                 <scale>1 1 1</scale>
                 <link name='link'>
