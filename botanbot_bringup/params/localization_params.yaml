@@ -21,9 +21,9 @@ ekf_local_filter_node:
     odom0_differential: false
     odom0_queue_size: 10
     imu0_config: [false,  false, false,  # X , Y , Z
-                  false,  false,  true,  # roll , pitch ,yaw
+                  false,  false,  false,  # roll , pitch ,yaw
                   false,  false, false,  # dX , dY , dZ
-                  false,  false,  true,  # droll , dpitch ,dyaw
+                  false,  false,  false,  # droll , dpitch ,dyaw
                   false,  false,  false] # ddX , ddY , ddZ
     imu0_relative: false                
     imu0_differential: false
@@ -61,15 +61,15 @@ ekf_global_filter_node:
     odom_frame: odom
     base_link_frame: base_link
     world_frame: map
-    odom0_config: [false,  false,  false, # X , Y , Z
-                    false, false, false,  # roll , pitch ,yaw
-                    true, true, true,     # dX , dY , dZ
-                    false, false, true,   # droll , dpitch ,dyaw
+    odom0_config: [false,  false, false, # X , Y , Z
+                    false, false, true,  # roll , pitch ,yaw
+                    false, false, false,     # dX , dY , dZ
+                    false, false, false,   # droll , dpitch ,dyaw
                     false, false, false]  # ddX , ddY , ddZ
     odom0_relative: false
     odom0_differential: false
     odom0_queue_size: 10
-    odom1_config: [true,  true,  false, # X , Y , Z
+    odom1_config: [true,  true,  true, # X , Y , Z
                   false, false, false, # roll , pitch ,yaw
                   false, false, false, # dX , dY , dZ
                   false, false, false,  # droll , dpitch ,dyaw
@@ -78,7 +78,7 @@ ekf_global_filter_node:
     odom1_differential: false
     odom1_queue_size: 10
     odom2_config: [true, true,  true, # X , Y , Z
-                  true,  true,  true, # roll , pitch ,yaw
+                  false,  false,  false, # roll , pitch ,yaw
                   false, false, false, # dX , dY , dZ
                   false, false, false,  # droll , dpitch ,dyaw
                   false, false, false] # ddX , ddY , ddZ
@@ -86,9 +86,9 @@ ekf_global_filter_node:
     odom2_differential: false
     odom2_queue_size: 10    
     imu0_config: [false,  false, false,  # X , Y , Z
-                  false,  false,  true,  # roll , pitch ,yaw
+                  true,  true,  true,  # roll , pitch ,yaw
                   false,  false, false,  # dX , dY , dZ
-                  false,  false,  true,  # droll , dpitch ,dyaw
+                  false,  false,  false,  # droll , dpitch ,dyaw
                   false,  false,  false] # ddX , ddY , ddZ
     imu0_relative: false
     imu0_differential: false

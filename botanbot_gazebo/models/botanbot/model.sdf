@@ -631,7 +631,7 @@
             </sensor>
         </link>
         <link name="gps">
-            <pose>0 -0 0.4 0 0 0</pose>
+            <pose>0 0 0.4 0 0 0</pose>
             <collision name="collision">
                 <geometry>
                     <mesh>
@@ -648,6 +648,17 @@
                     </mesh>
                 </geometry>
             </visual>
+            <inertial>
+                <inertia>
+                    <ixx>0.001</ixx>
+                    <ixy>0.000</ixy>
+                    <ixz>0.000</ixz>
+                    <iyy>0.001</iyy>
+                    <iyz>0.000</iyz>
+                    <izz>0.001</izz>
+                </inertia>
+                <mass>0.035</mass>
+            </inertial>
         </link>
         <link name="velodyne_link">
             <pose>0 0 0.9 0 0 0</pose>
@@ -849,10 +860,10 @@
             <bodyName>gps</bodyName>
             <topicName>gps/fix</topicName>
             <velocityTopicName>gps/fix_vel</velocityTopicName>
-            <drift>5.0 5.0 5.0</drift>
-            <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
+            <drift>0.0 0.0 0.0</drift>
+            <gaussianNoise>0.0 0.0 0.0</gaussianNoise>
             <velocityDrift>0 0 0</velocityDrift>
-            <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
+            <velocityGaussianNoise>0.0 0.0 0.0</velocityGaussianNoise>
         </plugin>
         <plugin name="hector_imu" filename="libgazebo_ros_imu.so">
             <alwaysOn>true</alwaysOn>
