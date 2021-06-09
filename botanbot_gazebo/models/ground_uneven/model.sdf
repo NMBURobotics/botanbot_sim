@@ -14,11 +14,13 @@
         <surface>
           <friction>
             <ode>
-              <mu>1.0</mu>
-              <mu2>1.0</mu2>
+              <mu>200</mu>
+              <mu2>100</mu2>
               <slip1>0.0</slip1>
               <slip2>0.0</slip2>
-            </ode>
+              <kp>10000000.0</kp>
+              <kd>1.0</kd>
+          </ode>
           </friction>
           <contact>
             <ode>

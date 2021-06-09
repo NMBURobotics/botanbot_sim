@@ -4,8 +4,8 @@ vox_nav_planner_server_rclcpp_node:
     expected_planner_frequency: 10.0
     enabled: true
     planner_name: "PRMstar"                   # PRMstar,LazyPRMstar,RRTstar,RRTsharp,RRTXstatic,InformedRRTstar,BITstar, 
-    interpolation_parameter: 15               # ABITstar,AITstar,CForest,LBTRRT,SST,TRRT,SPARS,SPARStwo,FMT,AnytimePathShortening
-    planner_timeout: 2.0
+    interpolation_parameter: 2               # ABITstar,AITstar,CForest,LBTRRT,SST,TRRT,SPARS,SPARStwo,FMT,AnytimePathShortening
+    planner_timeout: 6.0
     octomap_voxel_size: 0.2
     robot_body_dimens:
       x: 1.2
@@ -25,6 +25,15 @@ vox_nav_planner_server_rclcpp_node:
         maxyaw: 3.14
     SE3Planner: 
       plugin: "vox_nav_planning::SE3Planner"    # PRMstar: Reccomended
+      state_space_boundries:
+        minx: -50.0
+        maxx: 50.0
+        miny: -50.0
+        maxy: 50.0
+        minz: -2.0
+        maxz: 12.0
+    CompositePlanner: 
+      plugin: "vox_nav_planning::CompositePlanner"    # PRMstar: Reccomended
       state_space_boundries:
         minx: -50.0
         maxx: 50.0
@@ -62,7 +71,7 @@ vox_nav_map_server_rclcpp_node:
   ros__parameters:
     pcd_map_filename: /home/atas/colcon_ws/src/botanbot_sim/botanbot_bringup/maps/uneven_world.pcd
     # PCD PREPROCESS PARAMS
-    pcd_map_downsample_voxel_size: 0.1                                        # Set to smaller if you do not want downsample
+    pcd_map_downsample_voxel_size: 0.2                                        # Set to smaller if you do not want downsample
     pcd_map_transform:                                                        # Apply an optional rigid-body transrom to pcd file
       translation:
         x: 0.0
@@ -79,7 +88,7 @@ vox_nav_map_server_rclcpp_node:
     remove_outlier_min_neighbors_in_radius: 1
     # COST REGRESSION CRITICS AND PARAMS
     cell_radius: 0.4                                                         # Works as resolution of cost regression onto map
-    max_allowed_tilt: 0.69813                                                # 1st Cost critic Any angle(radians) higher than this is marked as NON-traversable
+    max_allowed_tilt: 0.6                                                    # 1st Cost critic Any angle(radians) higher than this is marked as NON-traversable
     max_allowed_point_deviation: 0.2                                         # 2nd Cost critic Point deviation from plane, this could be viewed as roughness of each cell 
     max_allowed_energy_gap: 0.2                                              # 3rd Cost critic Max Energy in each cell, this is detemined by max height differnce between edge points of cell
     node_elevation_distance: 1.0                                             # According to cell_radius, cell centers are sampled from original point cloud map, they are elevated from the original cloud
