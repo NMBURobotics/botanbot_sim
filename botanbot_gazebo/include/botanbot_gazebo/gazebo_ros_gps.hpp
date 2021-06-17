@@ -51,69 +51,69 @@ namespace gazebo
  * @brief
  *
  */
-class GazeboRosGps : public ModelPlugin
-{
-public:
-  struct GNSSConfig
+  class GazeboRosGps : public ModelPlugin
   {
-    bool STATUS_FIX = true;
-    bool STATUS_SBAS_FIX = false;
-    bool STATUS_GBAS_FIX = false;
-    bool SERVICE_GPS = true;
-    bool SERVICE_GLONASS = true;
-    bool SERVICE_COMPASS = true;
-    bool SERVICE_GALILEO = true;
+  public:
+    struct GNSSConfig
+    {
+      bool STATUS_FIX = true;
+      bool STATUS_SBAS_FIX = false;
+      bool STATUS_GBAS_FIX = false;
+      bool SERVICE_GPS = true;
+      bool SERVICE_GLONASS = true;
+      bool SERVICE_COMPASS = true;
+      bool SERVICE_GALILEO = true;
+    };
+    /**
+    * @brief Construct a new Gazebo Ros Gps object
+    *
+    */
+    GazeboRosGps();
+
+    /**
+     * @brief Destroy the Gazebo Ros Gps object
+     *
+     */
+    virtual ~GazeboRosGps();
+
+  protected:
+    virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
+    virtual void Reset();
+    virtual void OnUpdate();
+
+    /*void dynamicReconfigureCallback(GazeboRosGps::GNSSConfig & config, uint32_t level);*/
+
+  private:
+    gazebo::physics::WorldPtr world_;
+    gazebo::physics::LinkPtr link_;
+    gazebo::SensorModel3 position_error_model_;
+    gazebo::SensorModel3 velocity_error_model_;
+
+    rclcpp::Node::SharedPtr node_;
+    rclcpp::Publisher<sensor_msgs::msg::NavSatFix>::SharedPtr fix_publisher_;
+    rclcpp::Publisher<geometry_msgs::msg::Vector3Stamped>::SharedPtr velocity_publisher_;
+
+    sensor_msgs::msg::NavSatFix fix_;
+    geometry_msgs::msg::Vector3Stamped velocity_;
+
+    std::string namespace_;
+    std::string link_name_;
+    std::string frame_id_;
+    std::string fix_topic_;
+    std::string velocity_topic_;
+
+    double reference_latitude_;
+    double reference_longitude_;
+    double reference_heading_;
+    double reference_altitude_;
+    double radius_north_;
+    double radius_east_;
+
+    // UpdateTimer updateTimer;
+    gazebo::event::ConnectionPtr updateConnection_;
+    // Last update time.
+    gazebo::common::Time last_update_time_;
   };
-  /**
-  * @brief Construct a new Gazebo Ros Gps object
-  *
-  */
-  GazeboRosGps();
-
-  /**
-   * @brief Destroy the Gazebo Ros Gps object
-   *
-   */
-  virtual ~GazeboRosGps();
-
-protected:
-  virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
-  virtual void Reset();
-  virtual void OnUpdate();
-
-  /*void dynamicReconfigureCallback(GazeboRosGps::GNSSConfig & config, uint32_t level);*/
-
-private:
-  gazebo::physics::WorldPtr world_;
-  gazebo::physics::LinkPtr link_;
-  gazebo::SensorModel3 position_error_model_;
-  gazebo::SensorModel3 velocity_error_model_;
-
-  rclcpp::Node::SharedPtr node_;
-  rclcpp::Publisher<sensor_msgs::msg::NavSatFix>::SharedPtr fix_publisher_;
-  rclcpp::Publisher<geometry_msgs::msg::Vector3Stamped>::SharedPtr velocity_publisher_;
-
-  sensor_msgs::msg::NavSatFix fix_;
-  geometry_msgs::msg::Vector3Stamped velocity_;
-
-  std::string namespace_;
-  std::string link_name_;
-  std::string frame_id_;
-  std::string fix_topic_;
-  std::string velocity_topic_;
-
-  double reference_latitude_;
-  double reference_longitude_;
-  double reference_heading_;
-  double reference_altitude_;
-  double radius_north_;
-  double radius_east_;
-
-  // UpdateTimer updateTimer;
-  gazebo::event::ConnectionPtr updateConnection_;
-  // Last update time.
-  gazebo::common::Time last_update_time_;
-};
 
 }  // namespace gazebo
 

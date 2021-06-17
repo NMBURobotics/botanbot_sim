@@ -44,56 +44,56 @@ namespace gazebo
 /// \brief    Octomap plugin for Gazebo.
 /// \details  This plugin is dependent on ROS, and is not built if NO_ROS=TRUE is provided to
 ///           CMakeLists.txt. The PX4/Firmware build does not build this file.
-class OctomapFromGazeboWorld : public WorldPlugin
-{
-public:
-  OctomapFromGazeboWorld()
-  : WorldPlugin(), octomap_(NULL) {}
-  virtual ~OctomapFromGazeboWorld();
+  class OctomapFromGazeboWorld : public WorldPlugin
+  {
+  public:
+    OctomapFromGazeboWorld()
+    : WorldPlugin(), octomap_(NULL) {}
+    virtual ~OctomapFromGazeboWorld();
 
-protected:
-  /// \brief Load the plugin.
-  /// \param[in] _parent Pointer to the world that loaded this plugin.
-  /// \param[in] _sdf SDF element that describes the plugin.
-  void Load(physics::WorldPtr _parent, sdf::ElementPtr _sdf);
+  protected:
+    /// \brief Load the plugin.
+    /// \param[in] _parent Pointer to the world that loaded this plugin.
+    /// \param[in] _sdf SDF element that describes the plugin.
+    void Load(physics::WorldPtr _parent, sdf::ElementPtr _sdf);
 
-  bool CheckIfInterest(
-    const ignition::math::Vector3d & central_point,
-    gazebo::physics::RayShapePtr ray,
-    const double leaf_size);
+    bool CheckIfInterest(
+      const ignition::math::Vector3d & central_point,
+      gazebo::physics::RayShapePtr ray,
+      const double leaf_size);
 
-  void FloodFill(
-    const ignition::math::Vector3d & seed_point,
-    const ignition::math::Vector3d & bounding_box_origin,
-    const ignition::math::Vector3d & bounding_box_lengths,
-    const double leaf_size);
+    void FloodFill(
+      const ignition::math::Vector3d & seed_point,
+      const ignition::math::Vector3d & bounding_box_origin,
+      const ignition::math::Vector3d & bounding_box_lengths,
+      const double leaf_size);
 
-  /*! \brief Creates octomap by floodfilling freespace.
-  *
-  * Creates an octomap of the environment in 3 steps:
-  *   -# Casts rays along the central X,Y and Z axis of each cell. Marks any
-  *     cell where a ray intersects a mesh as occupied
-  *   -# Floodfills the area from the top and bottom marking all connected
-  *     space that has not been set to occupied as free.
-  *   -# Labels all remaining unknown space as occupied.
-  *
-  * Can give incorrect results in the following situations:
-  *   -# The top central cell or bottom central cell are either occupied or
-  *     completely enclosed by occupied cells.
-  *   -# A completely enclosed hollow space will be marked as occupied.
-  *   -# Cells containing a mesh that does not intersect its central axes will
-  *     be marked as unoccupied
-  */
-  void CreateOctomap(const vox_nav_msgs::srv::GetOctomap::Request & msg);
+    /*! \brief Creates octomap by floodfilling freespace.
+    *
+    * Creates an octomap of the environment in 3 steps:
+    *   -# Casts rays along the central X,Y and Z axis of each cell. Marks any
+    *     cell where a ray intersects a mesh as occupied
+    *   -# Floodfills the area from the top and bottom marking all connected
+    *     space that has not been set to occupied as free.
+    *   -# Labels all remaining unknown space as occupied.
+    *
+    * Can give incorrect results in the following situations:
+    *   -# The top central cell or bottom central cell are either occupied or
+    *     completely enclosed by occupied cells.
+    *   -# A completely enclosed hollow space will be marked as occupied.
+    *   -# Cells containing a mesh that does not intersect its central axes will
+    *     be marked as unoccupied
+    */
+    void CreateOctomap(const vox_nav_msgs::srv::GetOctomap::Request & msg);
 
-private:
-  physics::WorldPtr world_;
-  gazebo_ros::Node::SharedPtr node_;
-  rclcpp::Service<vox_nav_msgs::srv::GetOctomap>::SharedPtr srv_;
-  octomap::OcTree * octomap_;
-  rclcpp::Publisher<octomap_msgs::msg::Octomap>::SharedPtr octomap_publisher_;
+  private:
+    physics::WorldPtr world_;
+    gazebo_ros::Node::SharedPtr node_;
+    rclcpp::Service<vox_nav_msgs::srv::GetOctomap>::SharedPtr srv_;
+    octomap::OcTree * octomap_;
+    rclcpp::Publisher<octomap_msgs::msg::Octomap>::SharedPtr octomap_publisher_;
 
-};
+  };
 
 } // namespace gazebo
 

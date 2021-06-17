@@ -44,41 +44,41 @@
 namespace gazebo
 {
 
-class PointCloudFromGazeboWorld : public WorldPlugin
-{
-public:
-  PointCloudFromGazeboWorld()
-  : WorldPlugin() {}
-  virtual ~PointCloudFromGazeboWorld();
+  class PointCloudFromGazeboWorld : public WorldPlugin
+  {
+  public:
+    PointCloudFromGazeboWorld()
+    : WorldPlugin() {}
+    virtual ~PointCloudFromGazeboWorld();
 
-protected:
-  /// \brief Load the plugin.
-  /// \param[in] _parent Pointer to the world that loaded this plugin.
-  /// \param[in] _sdf SDF element that describes the plugin.
-  void Load(physics::WorldPtr _parent, sdf::ElementPtr _sdf);
+  protected:
+    /// \brief Load the plugin.
+    /// \param[in] _parent Pointer to the world that loaded this plugin.
+    /// \param[in] _sdf SDF element that describes the plugin.
+    void Load(physics::WorldPtr _parent, sdf::ElementPtr _sdf);
 
-  bool CheckIfInterest(
-    const ignition::math::Vector3d & central_point,
-    gazebo::physics::RayShapePtr ray,
-    const double leaf_size,
-    bool * is_traversable);
+    bool CheckIfInterest(
+      const ignition::math::Vector3d & central_point,
+      gazebo::physics::RayShapePtr ray,
+      const double leaf_size,
+      bool * is_traversable);
 
-  void FloodFill(
-    const ignition::math::Vector3d & seed_point,
-    const ignition::math::Vector3d & bounding_box_origin,
-    const ignition::math::Vector3d & bounding_box_lengths,
-    const double leaf_size);
+    void FloodFill(
+      const ignition::math::Vector3d & seed_point,
+      const ignition::math::Vector3d & bounding_box_origin,
+      const ignition::math::Vector3d & bounding_box_lengths,
+      const double leaf_size);
 
-  void CreatePointCloud(const vox_nav_msgs::srv::GetPointCloud::Request & msg);
+    void CreatePointCloud(const vox_nav_msgs::srv::GetPointCloud::Request & msg);
 
-private:
-  physics::WorldPtr world_;
-  gazebo_ros::Node::SharedPtr node_;
-  rclcpp::Service<vox_nav_msgs::srv::GetPointCloud>::SharedPtr srv_;
-  sensor_msgs::msg::PointCloud2::SharedPtr pointcloud_msg_;
-  rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pointcloud_publisher_;
+  private:
+    physics::WorldPtr world_;
+    gazebo_ros::Node::SharedPtr node_;
+    rclcpp::Service<vox_nav_msgs::srv::GetPointCloud>::SharedPtr srv_;
+    sensor_msgs::msg::PointCloud2::SharedPtr pointcloud_msg_;
+    rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pointcloud_publisher_;
 
-};
+  };
 
 } // namespace gazebo
 

@@ -37,27 +37,27 @@ namespace gazebo
 // The following boolean constants enable/disable debug printing when certain plugin methods are called.
 // Suitable for debugging purposes. Left on permanently can swamp std::out and can crash Gazebo.
 
-static const bool kPrintOnPluginLoad = false;
-static const bool kPrintOnUpdates = false;
-static const bool kPrintOnMsgCallback = false;
+  static const bool kPrintOnPluginLoad = false;
+  static const bool kPrintOnUpdates = false;
+  static const bool kPrintOnMsgCallback = false;
 
 /// @}
 
 // Default values
-static const std::string kDefaultNamespace = "";
-static constexpr double kDefaultRotorVelocitySlowdownSim = 10.0;
+  static const std::string kDefaultNamespace = "";
+  static constexpr double kDefaultRotorVelocitySlowdownSim = 10.0;
 
 //===============================================================================================//
 //================================== TOPICS FOR ROS INTERFACE ===================================//
 //===============================================================================================//
 
 // These should perhaps be defined in an .sdf/.xacro file instead?
-static const std::string kConnectGazeboToRosSubtopic = "connect_gazebo_to_ros_subtopic";
-static const std::string kConnectRosToGazeboSubtopic = "connect_ros_to_gazebo_subtopic";
+  static const std::string kConnectGazeboToRosSubtopic = "connect_gazebo_to_ros_subtopic";
+  static const std::string kConnectRosToGazeboSubtopic = "connect_ros_to_gazebo_subtopic";
 
 /// \brief    Special-case topic for ROS interface plugin to listen to (if present)
 ///           and broadcast transforms to the ROS system.
-static const std::string kBroadcastTransformSubtopic = "broadcast_transform";
+  static const std::string kBroadcastTransformSubtopic = "broadcast_transform";
 
 
 /// \brief      Obtains a parameter from sdf.
@@ -66,22 +66,23 @@ static const std::string kBroadcastTransformSubtopic = "broadcast_transform";
 /// \param[out] param         Param Variable to write the parameter to.
 /// \param[in]  default_value Default value, if the parameter not available.
 /// \param[in]  verbose       If true, gzerror if the parameter is not available.
-template<class T>
-bool getSdfParam(
-  sdf::ElementPtr sdf, const std::string & name, T & param, const T & default_value, const bool & verbose =
-  false)
-{
-  if (sdf->HasElement(name)) {
-    param = sdf->GetElement(name)->Get<T>();
-    return true;
-  } else {
-    param = default_value;
-    if (verbose) {
-      gzerr << "[rotors_gazebo_plugins] Please specify a value for parameter \"" << name << "\".\n";
+  template<class T>
+  bool getSdfParam(
+    sdf::ElementPtr sdf, const std::string & name, T & param, const T & default_value, const bool & verbose =
+    false)
+  {
+    if (sdf->HasElement(name)) {
+      param = sdf->GetElement(name)->Get<T>();
+      return true;
+    } else {
+      param = default_value;
+      if (verbose) {
+        gzerr << "[rotors_gazebo_plugins] Please specify a value for parameter \"" << name <<
+          "\".\n";
+      }
     }
+    return false;
   }
-  return false;
-}
 
 }
 

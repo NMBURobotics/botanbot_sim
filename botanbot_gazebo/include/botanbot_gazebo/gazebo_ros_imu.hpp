@@ -41,66 +41,66 @@
 
 namespace gazebo
 {
-class GazeboRosIMU : public ModelPlugin
-{
-public:
-  /// \brief Constructor
-  GazeboRosIMU();
+  class GazeboRosIMU : public ModelPlugin
+  {
+  public:
+    /// \brief Constructor
+    GazeboRosIMU();
 
-  /// \brief Destructor
-  virtual ~GazeboRosIMU();
+    /// \brief Destructor
+    virtual ~GazeboRosIMU();
 
-protected:
-  virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
-  virtual void Reset();
-  virtual void Update();
+  protected:
+    virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
+    virtual void Reset();
+    virtual void Update();
 
-private:
-  /// \brief The parent World
-  physics::WorldPtr world_;
+  private:
+    /// \brief The parent World
+    physics::WorldPtr world_;
 
-  /// \brief The link referred to by this plugin
-  physics::LinkPtr link_;
+    /// \brief The link referred to by this plugin
+    physics::LinkPtr link_;
 
-  /// \brief pointer to ros node
-  rclcpp::Node::SharedPtr node_;
-  rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr imu_publisher_;
+    /// \brief pointer to ros node
+    rclcpp::Node::SharedPtr node_;
+    rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr imu_publisher_;
 
-  /// \brief ros message
-  sensor_msgs::msg::Imu imuMsg_;
+    /// \brief ros message
+    sensor_msgs::msg::Imu imuMsg_;
 
-  /// \brief store link name
-  std::string link_name_;
+    /// \brief store link name
+    std::string link_name_;
 
-  /// \brief frame id
-  std::string frame_id_;
+    /// \brief frame id
+    std::string frame_id_;
 
-  /// \brief topic name
-  std::string topic_;
+    /// \brief topic name
+    std::string topic_;
 
-  ignition::math::Pose3d offset_;
+    ignition::math::Pose3d offset_;
 
-  /// \brief Sensor models
-  SensorModel3 accelModel_;
-  SensorModel3 rateModel_;
-  SensorModel yawModel_;
+    /// \brief Sensor models
+    SensorModel3 accelModel_;
+    SensorModel3 rateModel_;
+    SensorModel yawModel_;
 
-  /// \brief A mutex to lock access to fields that are used in message callbacks
-  boost::mutex lock;
+    /// \brief A mutex to lock access to fields that are used in message callbacks
+    boost::mutex lock;
 
-  ignition::math::Quaterniond orientation_;
-  ignition::math::Vector3d velocity_;
-  ignition::math::Vector3d accel_;
-  ignition::math::Vector3d rate_;
-  ignition::math::Vector3d gravity_;
+    ignition::math::Quaterniond orientation_;
+    ignition::math::Vector3d velocity_;
+    ignition::math::Vector3d accel_;
+    ignition::math::Vector3d rate_;
+    ignition::math::Vector3d gravity_;
 
-  /// \brief for setting ROS name space
-  std::string namespace_;
+    /// \brief for setting ROS name space
+    std::string namespace_;
 
-  // UpdateTimer updateTimer;
-  gazebo::event::ConnectionPtr updateConnection_;
-  gazebo::common::Time last_update_time_;
-};
+    // UpdateTimer updateTimer;
+    gazebo::event::ConnectionPtr updateConnection_;
+    gazebo::common::Time last_update_time_;
+  };
 }  // namespace gazebo
 
 #endif  // botanbot_GAZEBO__GAZEBO_ROS_IMU_HPP_

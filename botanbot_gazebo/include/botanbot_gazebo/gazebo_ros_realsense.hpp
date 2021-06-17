@@ -31,65 +31,65 @@
 namespace gazebo
 {
 /// \brief A plugin that simulates Real Sense camera streams.
-class GazeboRosRealsense : public RealSensePlugin
-{
-  /// \brief Constructor.
+  class GazeboRosRealsense : public RealSensePlugin
+  {
+    /// \brief Constructor.
 
-public:
-  GazeboRosRealsense();
+  public:
+    GazeboRosRealsense();
 
-  /// \brief Destructor.
+    /// \brief Destructor.
 
-public:
-  ~GazeboRosRealsense();
+  public:
+    ~GazeboRosRealsense();
 
-  // Documentation Inherited.
+    // Documentation Inherited.
 
-public:
-  virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
+  public:
+    virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
 
-  /// \brief Callback that publishes a received Depth Camera Frame as an
-  /// ImageStamped message.
+    /// \brief Callback that publishes a received Depth Camera Frame as an
+    /// ImageStamped message.
 
-public:
-  virtual void OnNewDepthFrame();
+  public:
+    virtual void OnNewDepthFrame();
 
-  /// \brief Helper function to fill the pointcloud information
-  bool FillPointCloudHelper(
-    sensor_msgs::msg::PointCloud2 & point_cloud_msg, uint32_t rows_arg,
-    uint32_t cols_arg, uint32_t step_arg, void * data_arg);
+    /// \brief Helper function to fill the pointcloud information
+    bool FillPointCloudHelper(
+      sensor_msgs::msg::PointCloud2 & point_cloud_msg, uint32_t rows_arg,
+      uint32_t cols_arg, uint32_t step_arg, void * data_arg);
 
-  /// \brief Callback that publishes a received Camera Frame as an
-  /// ImageStamped message.
+    /// \brief Callback that publishes a received Camera Frame as an
+    /// ImageStamped message.
 
-public:
-  virtual void OnNewFrame(
-    const rendering::CameraPtr cam,
-    const transport::PublisherPtr pub);
+  public:
+    virtual void OnNewFrame(
+      const rendering::CameraPtr cam,
+      const transport::PublisherPtr pub);
 
-protected:
-  boost::shared_ptr<camera_info_manager::CameraInfoManager>
-  camera_info_manager_;
+  protected:
+    boost::shared_ptr<camera_info_manager::CameraInfoManager>
+    camera_info_manager_;
 
-  /// \brief A pointer to the ROS node.
-  ///  A node will be instantiated if it does not exist.
+    /// \brief A pointer to the ROS node.
+    ///  A node will be instantiated if it does not exist.
 
-protected:
-  rclcpp::Node::SharedPtr node_;
+  protected:
+    rclcpp::Node::SharedPtr node_;
 
-private:
-  image_transport::ImageTransport * itnode_;
+  private:
+    image_transport::ImageTransport * itnode_;
 
-  rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pointcloud_pub_;
+    rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pointcloud_pub_;
 
-protected:
-  image_transport::CameraPublisher color_pub_, ir1_pub_, ir2_pub_, depth_pub_;
+  protected:
+    image_transport::CameraPublisher color_pub_, ir1_pub_, ir2_pub_, depth_pub_;
 
-  /// \brief ROS image messages
+    /// \brief ROS image messages
 
-protected:
-  sensor_msgs::msg::Image image_msg_, depth_msg_;
-  sensor_msgs::msg::PointCloud2 pointcloud_msg_;
-};
+  protected:
+    sensor_msgs::msg::Image image_msg_, depth_msg_;
+    sensor_msgs::msg::PointCloud2 pointcloud_msg_;
+  };
 }  // namespace gazebo
 #endif  // botanbot_GAZEBO__GAZEBO_ROS_REALSENSE_HPP_

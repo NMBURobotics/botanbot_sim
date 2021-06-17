@@ -44,114 +44,114 @@ namespace botanbot_gui
  * @brief A RQT instance, to control and visualize robot states conviniently
  *
  */
-class ControlPlugin : public rqt_gui_cpp::Plugin
-{
-  Q_OBJECT
+  class ControlPlugin : public rqt_gui_cpp::Plugin
+  {
+    Q_OBJECT
 
-public:
-  ControlPlugin();
+  public:
+    ControlPlugin();
 
-  ~ControlPlugin();
+    ~ControlPlugin();
 
-  virtual void initPlugin(qt_gui_cpp::PluginContext & context);
+    virtual void initPlugin(qt_gui_cpp::PluginContext & context);
 
-  virtual void shutdownPlugin();
+    virtual void shutdownPlugin();
 
-  virtual void saveSettings(
-    qt_gui_cpp::Settings & plugin_settings,
-    qt_gui_cpp::Settings & instance_settings) const;
+    virtual void saveSettings(
+      qt_gui_cpp::Settings & plugin_settings,
+      qt_gui_cpp::Settings & instance_settings) const;
 
-  virtual void restoreSettings(
-    const qt_gui_cpp::Settings & plugin_settings,
-    const qt_gui_cpp::Settings & instance_settings);
+    virtual void restoreSettings(
+      const qt_gui_cpp::Settings & plugin_settings,
+      const qt_gui_cpp::Settings & instance_settings);
 
-protected slots:
-  /**
-   * @brief stops current motion of robot, cancels any present goal
+  protected slots:
+    /**
+     * @brief stops current motion of robot, cancels any present goal
+     *
+     */
+    virtual void onStopButtonClick();
+
+    /**
+     * @brief drives robot to predefined charging station
+     *
+     */
+    virtual void onToChargeStationButtonClick();
+
+    /**
+     * @brief takes robot to pose , the pose values are recived from GUI spin boxes
+     *
+     */
+    virtual void onToSpecificPoseButtonClick();
+
+    /**
+     * @brief sends robot along predefined waypoints, the points can be reconfigured in the yaml file of chiconbot_waypoint_follower_client
+     *
+     */
+    virtual void onAlongPredefinedWaypointsButtonClick();
+
+    /**
+   * @brief Cancel all all active goals
    *
    */
-  virtual void onStopButtonClick();
+    virtual void onCancelAllGoals();
 
-  /**
-   * @brief drives robot to predefined charging station
-   *
-   */
-  virtual void onToChargeStationButtonClick();
+    /**
+     * @brief launches Gazebo simulation with chiconybot, only gazebo simulation is started nothing else
+     *
+     */
+    virtual void onGazeboStandaloneButtonClick();
 
-  /**
-   * @brief takes robot to pose , the pose values are recived from GUI spin boxes
-   *
-   */
-  virtual void onToSpecificPoseButtonClick();
+    /**
+     * @brief Start full gazebo simulation and navigation stack
+     *
+     */
+    virtual void onGazeboNavigationFullButtonClick();
 
-  /**
-   * @brief sends robot along predefined waypoints, the points can be reconfigured in the yaml file of chiconbot_waypoint_follower_client
-   *
-   */
-  virtual void onAlongPredefinedWaypointsButtonClick();
+    /**
+     * @brief starts only RVIZ standalone
+     *
+     */
+    virtual void onRvizButtonClick();
 
-  /**
- * @brief Cancel all all active goals
- *
- */
-  virtual void onCancelAllGoals();
+    /**
+     * @brief Terminates all ACTIVE ROS2 nodes
+     *
+     */
+    virtual void onTerminateAllButtonClick();
 
-  /**
-   * @brief launches Gazebo simulation with chiconybot, only gazebo simulation is started nothing else
-   *
-   */
-  virtual void onGazeboStandaloneButtonClick();
+    /**
+     * @brief manually jogs robot with GUI sliders
+     *
+     */
+    virtual void teleoperation();
 
-  /**
-   * @brief Start full gazebo simulation and navigation stack
-   *
-   */
-  virtual void onGazeboNavigationFullButtonClick();
+    /**
+     * @brief displays current robot states(x,y,theta) in GUI , with using of LCDNumber of QT
+     *
+     */
+    virtual void updateRobotStates();
 
-  /**
-   * @brief starts only RVIZ standalone
-   *
-   */
-  virtual void onRvizButtonClick();
-
-  /**
-   * @brief Terminates all ACTIVE ROS2 nodes
-   *
-   */
-  virtual void onTerminateAllButtonClick();
-
-  /**
-   * @brief manually jogs robot with GUI sliders
-   *
-   */
-  virtual void teleoperation();
-
-  /**
-   * @brief displays current robot states(x,y,theta) in GUI , with using of LCDNumber of QT
-   *
-   */
-  virtual void updateRobotStates();
-
-protected:
-  // GUI designed in QT Designer, automatically created from .ui file
-  Ui::ControlPluginWidget ui_;
-  // QT widget instance
-  QPointer<QWidget> widget_;
-  // RCLCPP node
-  rclcpp::Node::SharedPtr node_;
-  // ROS2 oublisher to publish velocity commands , for maual robot jogging
-  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_publisher_;
-  // QT timer to update robot states and publish velocity commands(if user is doing manual jog)
-  QPointer<QTimer> timer_;
-  // A timer used to check on the completion status of the action
-  QPointer<QTimer> basic_timer_;
-  // Robot controller to sent robot to goals and chek it navigation status
-  RobotController * robot_controller_;
-  // tf buffer to get transfroms
-  std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
-  // tf listner for tf transforms
-  std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
-};
+  protected:
+    // GUI designed in QT Designer, automatically created from .ui file
+    Ui::ControlPluginWidget ui_;
+    // QT widget instance
+    QPointer<QWidget> widget_;
+    // RCLCPP node
+    rclcpp::Node::SharedPtr node_;
+    // ROS2 oublisher to publish velocity commands , for maual robot jogging
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_publisher_;
+    // QT timer to update robot states and publish velocity commands(if user is doing manual jog)
+    QPointer<QTimer> timer_;
+    // A timer used to check on the completion status of the action
+    QPointer<QTimer> basic_timer_;
+    // Robot controller to sent robot to goals and chek it navigation status
+    RobotController * robot_controller_;
+    // tf buffer to get transfroms
+    std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
+    // tf listner for tf transforms
+    std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+  };
 
 }  // namespace botanbot_gui
 

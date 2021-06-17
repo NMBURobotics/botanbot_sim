@@ -44,194 +44,197 @@ static const double DEFAULT_REFERENCE_ALTITUDE = 0.0;
 namespace gazebo
 {
 
-GazeboRosGps::GazeboRosGps()
-{
-}
+  GazeboRosGps::GazeboRosGps()
+  {
+  }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Destructor
-GazeboRosGps::~GazeboRosGps()
-{
-  RCLCPP_ERROR(
-    node_->get_logger(), "Shutting down Gazebo GPS node bye. ",
-    link_name_.c_str());
-}
+  GazeboRosGps::~GazeboRosGps()
+  {
+    RCLCPP_ERROR(
+      node_->get_logger(), "Shutting down Gazebo GPS node bye. ",
+      link_name_.c_str());
+  }
 
 // Load the controller
-void GazeboRosGps::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
-{
-  world_ = _model->GetWorld();
-  node_ = rclcpp::Node::make_shared("GazeboGPSNode");
+  void GazeboRosGps::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
+  {
+    world_ = _model->GetWorld();
+    node_ = rclcpp::Node::make_shared("GazeboGPSNode");
 
-  // load parameters
-  if (!_sdf->HasElement("robotNamespace")) {
-    namespace_.clear();
-  } else {
-    namespace_ = _sdf->GetElement("robotNamespace")->GetValue()->GetAsString();
-  }
-
-  if (!_sdf->HasElement("bodyName")) {
-    link_ = _model->GetLink();
-    link_name_ = link_->GetName();
-  } else {
-    link_name_ = _sdf->GetElement("bodyName")->GetValue()->GetAsString();
-    link_ = _model->GetLink(link_name_);
-  }
-
-  if (!link_) {
-    RCLCPP_ERROR(
-      node_->get_logger(), "GazeboRosGps plugin error: bodyName: %s does not exist\n",
-      link_name_.c_str());
-    return;
-  }
-
-  // default parameters
-  frame_id_ = "gps";
-  fix_topic_ = "fix";
-  velocity_topic_ = "fix_velocity";
-
-  reference_latitude_ = DEFAULT_REFERENCE_LATITUDE;
-  reference_longitude_ = DEFAULT_REFERENCE_LONGITUDE;
-  reference_heading_ = DEFAULT_REFERENCE_HEADING * M_PI / 180.0;
-  reference_altitude_ = DEFAULT_REFERENCE_ALTITUDE;
-
-  fix_.status.status = sensor_msgs::msg::NavSatStatus::STATUS_FIX;
-  fix_.status.service = 0;
-
-  if (_sdf->HasElement("frameId")) {
-    frame_id_ = _sdf->GetElement("frameId")->GetValue()->GetAsString();
-  }
-
-  if (_sdf->HasElement("topicName")) {
-    fix_topic_ = _sdf->GetElement("topicName")->GetValue()->GetAsString();
-  }
-
-  if (_sdf->HasElement("velocityTopicName")) {
-    velocity_topic_ = _sdf->GetElement("velocityTopicName")->GetValue()->GetAsString();
-  }
-
-  if (_sdf->HasElement("referenceLatitude")) {
-    _sdf->GetElement("referenceLatitude")->GetValue()->Get(reference_latitude_);
-  }
-
-  if (_sdf->HasElement("referenceLongitude")) {
-    _sdf->GetElement("referenceLongitude")->GetValue()->Get(reference_longitude_);
-  }
-
-  if (_sdf->HasElement("referenceHeading")) {
-    if (_sdf->GetElement("referenceHeading")->GetValue()->Get(reference_heading_)) {
-      reference_heading_ *= M_PI / 180.0;
+    // load parameters
+    if (!_sdf->HasElement("robotNamespace")) {
+      namespace_.clear();
+    } else {
+      namespace_ = _sdf->GetElement("robotNamespace")->GetValue()->GetAsString();
     }
-  }
 
-  if (_sdf->HasElement("referenceAltitude")) {
-    _sdf->GetElement("referenceAltitude")->GetValue()->Get(reference_altitude_);
-  }
-
-  if (_sdf->HasElement("status")) {
-    int status = fix_.status.status;
-    if (_sdf->GetElement("status")->GetValue()->Get(status)) {
-      fix_.status.status = static_cast<sensor_msgs::msg::NavSatStatus::_status_type>(status);
+    if (!_sdf->HasElement("bodyName")) {
+      link_ = _model->GetLink();
+      link_name_ = link_->GetName();
+    } else {
+      link_name_ = _sdf->GetElement("bodyName")->GetValue()->GetAsString();
+      link_ = _model->GetLink(link_name_);
     }
-  }
 
-  if (_sdf->HasElement("service")) {
-    unsigned int service = fix_.status.service;
-    if (_sdf->GetElement("service")->GetValue()->Get(service)) {
-      fix_.status.service = static_cast<sensor_msgs::msg::NavSatStatus::_service_type>(service);
+    if (!link_) {
+      RCLCPP_ERROR(
+        node_->get_logger(), "GazeboRosGps plugin error: bodyName: %s does not exist\n",
+        link_name_.c_str());
+      return;
     }
+
+    // default parameters
+    frame_id_ = "gps";
+    fix_topic_ = "fix";
+    velocity_topic_ = "fix_velocity";
+
+    reference_latitude_ = DEFAULT_REFERENCE_LATITUDE;
+    reference_longitude_ = DEFAULT_REFERENCE_LONGITUDE;
+    reference_heading_ = DEFAULT_REFERENCE_HEADING * M_PI / 180.0;
+    reference_altitude_ = DEFAULT_REFERENCE_ALTITUDE;
+
+    fix_.status.status = sensor_msgs::msg::NavSatStatus::STATUS_FIX;
+    fix_.status.service = 0;
+
+    if (_sdf->HasElement("frameId")) {
+      frame_id_ = _sdf->GetElement("frameId")->GetValue()->GetAsString();
+    }
+
+    if (_sdf->HasElement("topicName")) {
+      fix_topic_ = _sdf->GetElement("topicName")->GetValue()->GetAsString();
+    }
+
+    if (_sdf->HasElement("velocityTopicName")) {
+      velocity_topic_ = _sdf->GetElement("velocityTopicName")->GetValue()->GetAsString();
+    }
+
+    if (_sdf->HasElement("referenceLatitude")) {
+      _sdf->GetElement("referenceLatitude")->GetValue()->Get(reference_latitude_);
+    }
+
+    if (_sdf->HasElement("referenceLongitude")) {
+      _sdf->GetElement("referenceLongitude")->GetValue()->Get(reference_longitude_);
+    }
+
+    if (_sdf->HasElement("referenceHeading")) {
+      if (_sdf->GetElement("referenceHeading")->GetValue()->Get(reference_heading_)) {
+        reference_heading_ *= M_PI / 180.0;
+      }
+    }
+
+    if (_sdf->HasElement("referenceAltitude")) {
+      _sdf->GetElement("referenceAltitude")->GetValue()->Get(reference_altitude_);
+    }
+
+    if (_sdf->HasElement("status")) {
+      int status = fix_.status.status;
+      if (_sdf->GetElement("status")->GetValue()->Get(status)) {
+        fix_.status.status = static_cast<sensor_msgs::msg::NavSatStatus::_status_type>(status);
+      }
+    }
+
+    if (_sdf->HasElement("service")) {
+      unsigned int service = fix_.status.service;
+      if (_sdf->GetElement("service")->GetValue()->Get(service)) {
+        fix_.status.service = static_cast<sensor_msgs::msg::NavSatStatus::_service_type>(service);
+      }
+    }
+
+    fix_.header.frame_id = frame_id_;
+    velocity_.header.frame_id = frame_id_;
+
+    position_error_model_.Load(_sdf);
+    velocity_error_model_.Load(_sdf, "velocity");
+
+    // calculate earth radii
+    double temp = 1.0 /
+      (1.0 - excentrity2 * sin(reference_latitude_ * M_PI / 180.0) *
+      sin(reference_latitude_ * M_PI / 180.0));
+    double prime_vertical_radius = equatorial_radius * sqrt(temp);
+    radius_north_ = prime_vertical_radius * (1 - excentrity2) * temp;
+    radius_east_ = prime_vertical_radius * cos(reference_latitude_ * M_PI / 180.0);
+
+    // Make sure the ROS node for Gazebo has already been initialized
+    if (!rclcpp::ok()) {
+      RCLCPP_ERROR(
+        node_->get_logger(),
+        "A ROS node for Gazebo has not been initialized, unable to load plugin. "
+        "Load the Gazebo system plugin 'libgazebo_ros_api_plugin.so' in the gazebo_ros package)");
+      return;
+    }
+
+    last_update_time_ = world_->SimTime();
+
+    fix_publisher_ =
+      node_->create_publisher<sensor_msgs::msg::NavSatFix>(fix_topic_, 10);
+    velocity_publisher_ = node_->create_publisher<geometry_msgs::msg::Vector3Stamped>(
+      velocity_topic_,
+      rclcpp::SensorDataQoS());
+
+
+    Reset();
+    this->updateConnection_ =
+      event::Events::ConnectWorldUpdateBegin(std::bind(&GazeboRosGps::OnUpdate, this));
   }
 
-  fix_.header.frame_id = frame_id_;
-  velocity_.header.frame_id = frame_id_;
-
-  position_error_model_.Load(_sdf);
-  velocity_error_model_.Load(_sdf, "velocity");
-
-  // calculate earth radii
-  double temp = 1.0 /
-    (1.0 - excentrity2 * sin(reference_latitude_ * M_PI / 180.0) *
-    sin(reference_latitude_ * M_PI / 180.0));
-  double prime_vertical_radius = equatorial_radius * sqrt(temp);
-  radius_north_ = prime_vertical_radius * (1 - excentrity2) * temp;
-  radius_east_ = prime_vertical_radius * cos(reference_latitude_ * M_PI / 180.0);
-
-  // Make sure the ROS node for Gazebo has already been initialized
-  if (!rclcpp::ok()) {
-    RCLCPP_ERROR(
-      node_->get_logger(),
-      "A ROS node for Gazebo has not been initialized, unable to load plugin. "
-      "Load the Gazebo system plugin 'libgazebo_ros_api_plugin.so' in the gazebo_ros package)");
-    return;
+  void GazeboRosGps::Reset()
+  {
+    last_update_time_ = world_->SimTime();
   }
-
-  last_update_time_ = world_->SimTime();
-
-  fix_publisher_ =
-    node_->create_publisher<sensor_msgs::msg::NavSatFix>(fix_topic_, 10);
-  velocity_publisher_ = node_->create_publisher<geometry_msgs::msg::Vector3Stamped>(
-    velocity_topic_,
-    rclcpp::SensorDataQoS());
-
-
-  Reset();
-  this->updateConnection_ =
-    event::Events::ConnectWorldUpdateBegin(std::bind(&GazeboRosGps::OnUpdate, this));
-}
-
-void GazeboRosGps::Reset()
-{
-  last_update_time_ = world_->SimTime();
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Update the controller
-void GazeboRosGps::OnUpdate()
-{
-  common::Time sim_time = world_->SimTime();
-  double dt = (world_->SimTime() - last_update_time_).Double();
+  void GazeboRosGps::OnUpdate()
+  {
+    common::Time sim_time = world_->SimTime();
+    double dt = (world_->SimTime() - last_update_time_).Double();
 
-  ignition::math::Pose3d pose = link_->WorldPose();
+    ignition::math::Pose3d pose = link_->WorldPose();
 
-  ignition::math::Vector3d velocity = velocity_error_model_(link_->WorldLinearVel(), dt);
-  ignition::math::Vector3d position = position_error_model_(pose.Pos(), dt);
+    ignition::math::Vector3d velocity = velocity_error_model_(link_->WorldLinearVel(), dt);
+    ignition::math::Vector3d position = position_error_model_(pose.Pos(), dt);
 
-  // An offset error in the velocity is integrated into the position error for the next timestep.
-  // Note: Usually GNSS receivers have almost no drift in the velocity signal.
-  position_error_model_.setCurrentDrift(
-    position_error_model_.getCurrentDrift() + dt * velocity_error_model_.getCurrentDrift());
+    // An offset error in the velocity is integrated into the position error for the next timestep.
+    // Note: Usually GNSS receivers have almost no drift in the velocity signal.
+    position_error_model_.setCurrentDrift(
+      position_error_model_.getCurrentDrift() + dt * velocity_error_model_.getCurrentDrift());
 
-  fix_.header.stamp.sec = sim_time.sec;
-  fix_.header.stamp.nanosec = sim_time.nsec;
+    fix_.header.stamp.sec = sim_time.sec;
+    fix_.header.stamp.nanosec = sim_time.nsec;
 
-  velocity_.header.stamp = fix_.header.stamp;
+    velocity_.header.stamp = fix_.header.stamp;
 
-  fix_.latitude = reference_latitude_ +
-    ( cos(reference_heading_) * position.X() + sin(reference_heading_) * position.Y()) /
-    radius_north_ * 180.0 / M_PI;
-  fix_.longitude = reference_longitude_ -
-    (-sin(reference_heading_) * position.X() + cos(reference_heading_) * position.Y()) /
-    radius_east_ * 180.0 / M_PI;
-  fix_.altitude = reference_altitude_ + position.Z();
-  velocity_.vector.x = cos(reference_heading_) * velocity.X() + sin(reference_heading_) *
-    velocity.Y();
-  velocity_.vector.y = -sin(reference_heading_) * velocity.X() + cos(reference_heading_) *
-    velocity.Y();
-  velocity_.vector.z = velocity.Z();
+    fix_.latitude = reference_latitude_ +
+      ( cos(reference_heading_) * position.X() + sin(reference_heading_) * position.Y()) /
+      radius_north_ * 180.0 / M_PI;
+    fix_.longitude = reference_longitude_ -
+      (-sin(reference_heading_) * position.X() + cos(reference_heading_) * position.Y()) /
+      radius_east_ * 180.0 / M_PI;
+    fix_.altitude = reference_altitude_ + position.Z();
+    velocity_.vector.x = cos(reference_heading_) * velocity.X() + sin(reference_heading_) *
+      velocity.Y();
+    velocity_.vector.y = -sin(reference_heading_) * velocity.X() + cos(reference_heading_) *
+      velocity.Y();
+    velocity_.vector.z = velocity.Z();
 
-  fix_.position_covariance_type = sensor_msgs::msg::NavSatFix::COVARIANCE_TYPE_DIAGONAL_KNOWN;
-  fix_.position_covariance[0] = position_error_model_.drift.X() * position_error_model_.drift.X() +
-    position_error_model_.gaussian_noise.X() * position_error_model_.gaussian_noise.X();
-  fix_.position_covariance[4] = position_error_model_.drift.Y() * position_error_model_.drift.Y() +
-    position_error_model_.gaussian_noise.Y() * position_error_model_.gaussian_noise.Y();
-  fix_.position_covariance[8] = position_error_model_.drift.Z() * position_error_model_.drift.Z() +
-    position_error_model_.gaussian_noise.Z() * position_error_model_.gaussian_noise.Z();
+    fix_.position_covariance_type = sensor_msgs::msg::NavSatFix::COVARIANCE_TYPE_DIAGONAL_KNOWN;
+    fix_.position_covariance[0] = position_error_model_.drift.X() *
+      position_error_model_.drift.X() +
+      position_error_model_.gaussian_noise.X() * position_error_model_.gaussian_noise.X();
+    fix_.position_covariance[4] = position_error_model_.drift.Y() *
+      position_error_model_.drift.Y() +
+      position_error_model_.gaussian_noise.Y() * position_error_model_.gaussian_noise.Y();
+    fix_.position_covariance[8] = position_error_model_.drift.Z() *
+      position_error_model_.drift.Z() +
+      position_error_model_.gaussian_noise.Z() * position_error_model_.gaussian_noise.Z();
 
-  fix_publisher_->publish(fix_);
-  velocity_publisher_->publish(velocity_);
-  last_update_time_ = world_->SimTime();
-}
+    fix_publisher_->publish(fix_);
+    velocity_publisher_->publish(velocity_);
+    last_update_time_ = world_->SimTime();
+  }
 // Register this plugin with the simulator
-GZ_REGISTER_MODEL_PLUGIN(GazeboRosGps)
+  GZ_REGISTER_MODEL_PLUGIN(GazeboRosGps)
 
 }  // namespace gazebo

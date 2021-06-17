@@ -20,7 +20,7 @@
 
 namespace gazebo_plugins
 {
-class botanbotAckermannDrivePrivate;
+  class botanbotAckermannDrivePrivate;
 
 /// A ackermann drive plugin for car like robots. Subscribes to geometry_msgs/twist
 
@@ -60,26 +60,26 @@ class botanbotAckermannDrivePrivate;
         </plugin>
   \endcode
 */
-class botanbotAckermannDrive : public gazebo::ModelPlugin
-{
-public:
-  /// Constructor
-  botanbotAckermannDrive();
+  class botanbotAckermannDrive : public gazebo::ModelPlugin
+  {
+  public:
+    /// Constructor
+    botanbotAckermannDrive();
 
-  /// Destructor
-  ~botanbotAckermannDrive();
+    /// Destructor
+    ~botanbotAckermannDrive();
 
-protected:
-  // Documentation inherited
-  void Load(gazebo::physics::ModelPtr _model, sdf::ElementPtr _sdf) override;
+  protected:
+    // Documentation inherited
+    void Load(gazebo::physics::ModelPtr _model, sdf::ElementPtr _sdf) override;
 
-  // Documentation inherited
-  void Reset() override;
+    // Documentation inherited
+    void Reset() override;
 
-private:
-  /// Private data pointer
-  std::unique_ptr<botanbotAckermannDrivePrivate> impl_;
-};
+  private:
+    /// Private data pointer
+    std::unique_ptr<botanbotAckermannDrivePrivate> impl_;
+  };
 }  // namespace gazebo_plugins
 
 #endif  // botanbot_GAZEBO__botanbot_ACKERMANN_DRIVE_HPP_
