@@ -2,7 +2,6 @@ vox_nav_planner_server_rclcpp_node:
   ros__parameters:
     planner_plugin: "ElevationPlanner"              # other options: "SE2Planner", "ElevationPlanner"
     expected_planner_frequency: 1.0
-    enabled: true
     planner_name: "PRMstar"                         # PRMstar,LazyPRMstar,RRTstar,RRTsharp,RRTXstatic,InformedRRTstar,BITstar, 
     interpolation_parameter: 20                     # ABITstar,AITstar,CForest,LBTRRT,SST,TRRT,SPARS,SPARStwo,FMT,AnytimePathShortening
     planner_timeout: 10.0
