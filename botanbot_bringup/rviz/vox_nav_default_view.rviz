@@ -124,45 +124,44 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          odom:
-            base_link:
-              camera_bottom_screw_frame:
-                camera_link:
-                  camera_depth_frame:
-                    camera_color_frame:
-                      camera_color_optical_frame:
-                        {}
-                    camera_depth_optical_frame:
-                      {}
-                    camera_left_ir_frame:
-                      camera_left_ir_optical_frame:
-                        {}
-                    camera_right_ir_frame:
-                      camera_right_ir_optical_frame:
-                        {}
-              front_left_wheel:
-                {}
-              front_right_wheel:
-                {}
-              gps:
-                {}
-              imu_link:
-                {}
-              rear_axle:
-                {}
-              rear_left_wheel:
-                {}
-              rear_right_wheel:
-                {}
-              steering_wheel:
-                {}
-              velodyne_link:
-                {}
-              wide_angle_camera_link:
-                {}
         utm:
-          {}
+          map:
+            odom:
+              base_link:
+                camera_bottom_screw_frame:
+                  camera_link:
+                    camera_depth_frame:
+                      camera_color_frame:
+                        camera_color_optical_frame:
+                          {}
+                      camera_depth_optical_frame:
+                        {}
+                      camera_left_ir_frame:
+                        camera_left_ir_optical_frame:
+                          {}
+                      camera_right_ir_frame:
+                        camera_right_ir_optical_frame:
+                          {}
+                front_left_wheel:
+                  {}
+                front_right_wheel:
+                  {}
+                gps:
+                  {}
+                imu_link:
+                  {}
+                rear_axle:
+                  {}
+                rear_left_wheel:
+                  {}
+                rear_right_wheel:
+                  {}
+                steering_wheel:
+                  {}
+                velodyne_link:
+                  {}
+                wide_angle_camera_link:
+                  {}
       Update Interval: 0
       Value: true
     - Class: rviz_default_plugins/Image
@@ -363,7 +362,7 @@ Visualization Manager:
       Enabled: true
       Name: Global Plan
       Namespaces:
-        path: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -375,7 +374,7 @@ Visualization Manager:
       Enabled: true
       Name: Local Plan
       Namespaces:
-        path: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -417,9 +416,9 @@ Visualization Manager:
       Value: true
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
-      Name: MarkerArray
+      Name: SuperVoxelVisuals
       Namespaces:
-        my_namespace: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -461,25 +460,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/ThirdPersonFollower
-      Distance: 84.97559356689453
+      Distance: 100.36688995361328
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -3.254296064376831
-        Y: -5.132702827453613
-        Z: -9.062122262548655e-05
+        X: -27.89768409729004
+        Y: -3.8170952796936035
+        Z: -7.536243356298655e-05
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.2697957754135132
+      Pitch: 0.8547963500022888
       Target Frame: map
       Value: ThirdPersonFollower (rviz_default_plugins)
-      Yaw: 3.1531944274902344
+      Yaw: 3.0981953144073486
     Saved:
       - Class: rviz_default_plugins/XYOrbit
         Distance: 41.129825592041016
