@@ -1,6 +1,6 @@
 vox_nav_planner_server_rclcpp_node:
   ros__parameters:
-    planner_plugin: "ElevationPlanner"              # other options: "SE2Planner", "ElevationPlanner"
+    planner_plugin: "OptimalElevationPlanner"       # other options: "SE2Planner", "ElevationPlanner", "OptimalElevationPlanner"
     expected_planner_frequency: 1.0
     planner_name: "PRMstar"                         # PRMstar,LazyPRMstar,RRTstar,RRTsharp,RRTXstatic,InformedRRTstar,BITstar, 
     interpolation_parameter: 20                     # ABITstar,AITstar,CForest,LBTRRT,SST,TRRT,SPARS,SPARStwo,FMT,AnytimePathShortening
@@ -27,6 +27,15 @@ vox_nav_planner_server_rclcpp_node:
       plugin: "vox_nav_planning::ElevationPlanner"    # PRMstar: Reccomended
       se2_space: "DUBINS"                             # "DUBINS","REEDS", "SE2" ### PS. Use DUBINS OR REEDS for Ackermann
       rho: 1.0                                        # Curve radius for reeds and dubins only
+      state_space_boundries:
+        minx: -50.0
+        maxx: 50.0
+        miny: -50.0
+        maxy: 50.0
+        minz: -2.0
+        maxz: 12.0
+    OptimalElevationPlanner: 
+      plugin: "vox_nav_planning::OptimalElevationPlanner"    # Bases on Astar
       state_space_boundries:
         minx: -50.0
         maxx: 50.0
