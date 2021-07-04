@@ -35,7 +35,15 @@ vox_nav_planner_server_rclcpp_node:
         minz: -2.0
         maxz: 12.0
     OptimalElevationPlanner: 
-      plugin: "vox_nav_planning::OptimalElevationPlanner"    # Bases on Astar
+      plugin: "vox_nav_planning::OptimalElevationPlanner"    # Bases on Astar on SuperVoxelClustering
+      supervoxel_disable_transform: false
+      supervoxel_resolution: 0.8
+      supervoxel_seed_resolution: 1.0
+      supervoxel_color_importance: 0.0
+      supervoxel_spatial_importance: 2.0
+      supervoxel_normal_importance: 1.0
+      distance_penalty_weight: 0.0
+      elevation_penalty_weight: 2.0
       state_space_boundries:
         minx: -50.0
         maxx: 50.0
@@ -43,6 +51,7 @@ vox_nav_planner_server_rclcpp_node:
         maxy: 50.0
         minz: -2.0
         maxz: 12.0
+
 
 vox_nav_controller_server_rclcpp_node:
    ros__parameters:
@@ -98,7 +107,7 @@ vox_nav_map_server_rclcpp_node:
     robot_mass: 0.1                                                          # approximate robot mass considering cell_radius
     average_speed: 1.0                                                       # average robot speed(m/s) when calcuating kinetic energy m = 0.5 * (m * pow(v,2))
     include_elevated_surfel_centroids: true                                  # should surfel centers be included in ap ? , they will apear as yellow
-    cost_critic_weights: [0.6, 0.2, 0.2]                                     # Give weight to each cost critic wen calculating final cost
+    cost_critic_weights: [0.6, 0.2, 0.2]                                     # Give weight to each cost critic wen calculating final cost, see above 3 Cost Critic descriptions
     # PCD MAP IS TRANSLATED TO OCTOMAP TO BE USED BY PLANNER
     octomap_voxel_size: 0.2
     octomap_publish_frequency: 1
