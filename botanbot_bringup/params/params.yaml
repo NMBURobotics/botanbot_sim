@@ -43,7 +43,7 @@ vox_nav_planner_server_rclcpp_node:
       supervoxel_color_importance: 0.0
       supervoxel_spatial_importance: 1.0
       supervoxel_normal_importance: 1.0
-      distance_penalty_weight: 1.0
+      distance_penalty_weight: 0.0
       elevation_penalty_weight: 1.0
       state_space_boundries:
         minx: -50.0
@@ -52,7 +52,6 @@ vox_nav_planner_server_rclcpp_node:
         maxy: 50.0
         minz: -2.0
         maxz: 12.0
-
 
 vox_nav_controller_server_rclcpp_node:
    ros__parameters:
@@ -99,7 +98,7 @@ vox_nav_map_server_rclcpp_node:
     remove_outlier_radius_search: 0.1
     remove_outlier_min_neighbors_in_radius: 1
     # COST REGRESSION CRITICS AND PARAMS
-    cell_radius: 0.4                                                         # Works as resolution of cost regression onto map
+    cell_radius: 0.6                                                         # Works as resolution of cost regression onto map
     max_allowed_tilt: 0.6                                                    # 1st Cost critic Any angle(radians) higher than this is marked as NON-traversable
     max_allowed_point_deviation: 0.2                                         # 2nd Cost critic Point deviation from plane, this could be viewed as roughness of each cell 
     max_allowed_energy_gap: 0.2                                              # 3rd Cost critic Max Energy in each cell, this is detemined by max height differnce between edge points of cell
