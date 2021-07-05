@@ -36,8 +36,8 @@ vox_nav_planner_server_rclcpp_node:
         maxz: 12.0
     OptimalElevationPlanner: 
       plugin: "vox_nav_planning::OptimalElevationPlanner"    # Bases on Astar on SuperVoxelClustering
-      graph_search_method: "dijkstra"                           # Other options: astar , dijkstra
-      supervoxel_disable_transform: false
+      graph_search_method: "astar"                           # Other options: astar , dijkstra
+      supervoxel_disable_transform: false                    # set true for organized point clouds
       supervoxel_resolution: 0.8
       supervoxel_seed_resolution: 1.0
       supervoxel_color_importance: 0.0
