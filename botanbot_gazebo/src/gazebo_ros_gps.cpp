@@ -61,7 +61,7 @@ namespace gazebo
   void GazeboRosGps::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   {
     world_ = _model->GetWorld();
-    node_ = rclcpp::Node::make_shared("GazeboGPSNode");
+    node_ = rclcpp::Node::make_shared("gazebo_ros_gps_plugin_node");
 
     // load parameters
     if (!_sdf->HasElement("robotNamespace")) {
@@ -177,6 +177,7 @@ namespace gazebo
     Reset();
     this->updateConnection_ =
       event::Events::ConnectWorldUpdateBegin(std::bind(&GazeboRosGps::OnUpdate, this));
+    RCLCPP_INFO(node_->get_logger(), "Loaded . ");
   }
 
   void GazeboRosGps::Reset()

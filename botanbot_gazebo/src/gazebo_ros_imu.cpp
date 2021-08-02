@@ -52,7 +52,7 @@ namespace gazebo
 // Load the controller
   void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   {
-    node_ = rclcpp::Node::make_shared("GazeboIMUNode");
+    node_ = rclcpp::Node::make_shared("gazebo_ros_imu_plugin_node");
 
     // Get the world name.
     world_ = _model->GetWorld();
@@ -152,6 +152,7 @@ namespace gazebo
     last_update_time_ = world_->SimTime();
     this->updateConnection_ =
       event::Events::ConnectWorldUpdateBegin(std::bind(&GazeboRosIMU::Update, this));
+    RCLCPP_INFO(node_->get_logger(), "Loaded . ");
   }
 
   void GazeboRosIMU::Reset()

@@ -60,6 +60,8 @@ void RealSensePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   cameraParamsMap_.insert(std::make_pair(IRED1_CAMERA_NAME, CameraParams()));
   cameraParamsMap_.insert(std::make_pair(IRED2_CAMERA_NAME, CameraParams()));
 
+  std::cout << "RealSensePlugin: inserted name of cameras " << std::endl;
+
   do {
     std::string name = _sdf->GetName();
     if (name == "depthUpdateRate") {
@@ -121,11 +123,13 @@ void RealSensePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     } else if (name == "robotNamespace") {
       break;
     } else {
-      throw std::runtime_error("Ivalid parameter for ReakSensePlugin");
+      throw std::runtime_error("Ivalid parameter for RealSensePlugin");
     }
 
     _sdf = _sdf->GetNextElement();
   } while (_sdf);
+
+  std::cout << "RealSensePlugin: got the options provided in xml " << std::endl;
 
   // Store a pointer to the this model
   this->rsModel = _model;
@@ -136,20 +140,23 @@ void RealSensePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Sensors Manager
   sensors::SensorManager * smanager = sensors::SensorManager::Instance();
 
-  // Get Cameras Renderers
+  this->ired1Cam = std::dynamic_pointer_cast<sensors::CameraSensor>(
+    smanager->GetSensor(prefix + IRED1_CAMERA_NAME))
+    ->Camera();
+
+  this->ired2Cam = std::dynamic_pointer_cast<sensors::CameraSensor>(
+    smanager->GetSensor(prefix + IRED2_CAMERA_NAME))
+    ->Camera();
+
+  this->colorCam = std::dynamic_pointer_cast<sensors::CameraSensor>(
+    smanager->GetSensor(prefix + COLOR_CAMERA_NAME))
+    ->Camera();
+
   this->depthCam = std::dynamic_pointer_cast<sensors::DepthCameraSensor>(
     smanager->GetSensor(prefix + DEPTH_CAMERA_NAME))
     ->DepthCamera();
 
-  this->ired1Cam = std::dynamic_pointer_cast<sensors::CameraSensor>(
-    smanager->GetSensor(prefix + IRED1_CAMERA_NAME))
-    ->Camera();
-  this->ired2Cam = std::dynamic_pointer_cast<sensors::CameraSensor>(
-    smanager->GetSensor(prefix + IRED2_CAMERA_NAME))
-    ->Camera();
-  this->colorCam = std::dynamic_pointer_cast<sensors::CameraSensor>(
-    smanager->GetSensor(prefix + COLOR_CAMERA_NAME))
-    ->Camera();
+  std::cout << "RealSensePlugin: setted up Cameras Renderers" << std::endl;
 
   // Check if camera renderers have been found successfuly
   if (!this->depthCam) {
@@ -172,6 +179,8 @@ void RealSensePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
       std::endl;
     return;
   }
+
+  std::cout << "RealSensePlugin: made sure Cameras Renderers are up" << std::endl;
 
   // Resize Depth Map dimensions
   try {
@@ -219,6 +228,8 @@ void RealSensePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Listen to the update event
   this->updateConnection = event::Events::ConnectWorldUpdateBegin(
     boost::bind(&RealSensePlugin::OnUpdate, this));
+
+  std::cout << "RealSensePlugin: constructed" << std::endl;
 }
 
 /////////////////////////////////////////////////
