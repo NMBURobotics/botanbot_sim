@@ -69,6 +69,16 @@
             <uri>model://botanbot</uri>
         </include>
         <include>
+            <pose>0.0 0 1.0 0.0 0.0 0.0</pose>
+            <uri>model://full_sensor_suite</uri>
+        </include>
+        <plugin name="sensor_base_attacher_plugin" filename="libsensor_base_attacher_plugin.so">
+            <robot_model_name>botanbot</robot_model_name>
+            <robot_base_link_name>base_link</robot_base_link_name>
+            <sensor_suite_model_name>full_sensor_suite</sensor_suite_model_name>
+            <sensor_suite_base_link_name>base_sensor_link</sensor_suite_base_link_name>
+        </plugin>
+        <include>
             <uri>model://vrc_heightmap_1</uri>
         </include>
         <include>
