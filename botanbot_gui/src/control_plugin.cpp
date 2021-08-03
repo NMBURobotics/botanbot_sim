@@ -112,7 +112,7 @@ namespace botanbot_gui
     //timer_->connect(timer_, SIGNAL(timeout()), this, SLOT(updateRobotStates()));
 
     cmd_vel_publisher_ =
-      node_->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
+      node_->create_publisher<geometry_msgs::msg::Twist>("vox_nav/cmd_vel", 10);
 
     std::cout << "Initialized plugin . . " << std::endl;
 
