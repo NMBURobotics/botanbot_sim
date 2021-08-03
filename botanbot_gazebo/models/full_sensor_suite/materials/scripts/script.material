@@ -1,4 +1,4 @@
-material botanbot/fur
+material full_sensor_suite/fur
         {
           receive_shadows off
           technique

@@ -1,7 +1,9 @@
 <?xml version='1.0'?>
 <sdf version='1.7'>
     <model name='full_sensor_suite'>
-
+        <!-- END JOINTS RELATED TO ROBOT BODY   -->
+        <!-- ////////////////////////////////   -->
+        <!-- BEGIN LINKS RELATED TO SENSORS     -->
         <link name="base_sensor_link" />
 
         <link name="camera_bottom_screw_frame">
@@ -120,18 +122,6 @@
                 <update_rate>1</update_rate>
                 <visualize>0</visualize>
             </sensor>
-            <inertial>
-                <pose>0 0 0 -1.57 0 -1.57</pose>
-                <inertia>
-                    <ixx>0.001</ixx>
-                    <ixy>0.000</ixy>
-                    <ixz>0.000</ixz>
-                    <iyy>0.001</iyy>
-                    <iyz>0.000</iyz>
-                    <izz>0.001</izz>
-                </inertia>
-                <mass>0.564</mass>
-            </inertial>
         </link>
         <link name="wide_angle_camera_link">
             <pose>0.3 0.0 0.9 0 0 0</pose>
@@ -261,6 +251,15 @@
                         <scale>0.001 0.001 0.001</scale>
                     </mesh>
                 </geometry>
+                <material>
+                    <script>
+                        <uri>model://full_sensor_suite/materials/scripts</uri>
+                        <uri>model://full_sensor_suite/materials/textures</uri>
+                        <name>full_sensor_suite/fur</name>
+                    </script>
+                    <shader type='pixel' />
+                    <emissive>0 0 0 1</emissive>
+                </material>
             </visual>
             <sensor type="gpu_ray" name="VLP16">
                 <visualize>false</visualize>
@@ -299,18 +298,6 @@
                     <gaussianNoise>0.008</gaussianNoise>
                 </plugin>
             </sensor>
-            <inertial>
-                <pose>0 0 0 -1.57 0 -1.57</pose>
-                <inertia>
-                    <ixx>0.001</ixx>
-                    <ixy>0.000</ixy>
-                    <ixz>0.000</ixz>
-                    <iyy>0.001</iyy>
-                    <iyz>0.000</iyz>
-                    <izz>0.001</izz>
-                </inertia>
-                <mass>0.564</mass>
-            </inertial>
         </link>
         <link name="imu_link">
             <pose>0 0 1.2 0 0 0</pose>
@@ -342,6 +329,9 @@
                 <mass>0.035</mass>
             </inertial>
         </link>
+        <!-- END LINKS RELATED TO SENSORS       -->
+        <!-- ////////////////////////////////   -->
+        <!-- BEGIN JOINTS RELATED TO SENSORS    -->
 
         <joint name="realsense_joint" type="fixed">
             <parent>base_sensor_link</parent>
@@ -368,8 +358,10 @@
             <child>imu_link</child>
             <pose>0 0 0 0 0 0</pose>
         </joint>
-
-        <plugin name="camera" filename="librealsense_gazebo_plugin.so">
+        <!-- END JOINTS RELATED TO SENSORS       -->
+        <!-- ////////////////////////////////    -->
+        <!-- BEGIN full_sensor_suite PLUGINS     -->
+        <plugin name="camera" filename="libgazebo_ros_realsense_camera_plugin.so">
             <prefix>camera</prefix>
             <depthUpdateRate>30.0</depthUpdateRate>
             <colorUpdateRate>30.0</colorUpdateRate>
@@ -396,6 +388,7 @@
             <alwaysOn>true</alwaysOn>
             <updateRate>30.0</updateRate>
             <bodyName>gps_link</bodyName>
+            <frameId>gps_link</frameId>
             <topicName>gps/fix</topicName>
             <velocityTopicName>gps/fix_vel</velocityTopicName>
             <drift>0.0 0.0 0.0</drift>
@@ -413,5 +406,7 @@
             <xyzOffset>0.0 0.0 0.0</xyzOffset>
             <rpyOffset>0.0 0.0 0.0</rpyOffset>
         </plugin>
+
+        <!-- END full_sensor_suite PLUGINS              -->
     </model>
 </sdf>
