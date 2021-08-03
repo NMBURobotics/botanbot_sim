@@ -90,24 +90,6 @@ if(ENABLE_PROFILER)
   target_link_libraries(botanbot_ackermann_drive ${ignition-common3_LIBRARIES})
 endif()
 
-# botanbot REALSENSE CAMERA GAZEBO PLUGIN SHARED LIBRARY
-add_library(realsense_gazebo_plugin SHARED  src/RealSensePlugin.cpp
-                                            src/gazebo_ros_realsense.cpp)
-ament_target_dependencies(realsense_gazebo_plugin ${dependencies})
-target_link_libraries(realsense_gazebo_plugin ${GAZEBO_LIBRARIES})
-
-# botanbot VELODYNE LIDAR GAZEBO PLUGIN SHARED LIBRARY
-add_library(gazebo_ros_velodyne_laser SHARED src/gazebo_ros_velodyne_laser.cpp)
-ament_target_dependencies(gazebo_ros_velodyne_laser ${dependencies})
-
-# botanbot HECTOR GPS SENSOR GAZEBO PLUGIN SHARED LIBRARY
-add_library(gazebo_ros_gps SHARED src/gazebo_ros_gps.cpp)
-ament_target_dependencies(gazebo_ros_gps ${dependencies})
-
-# botanbot HECTOR imu SENSOR GAZEBO PLUGIN SHARED LIBRARY
-add_library(gazebo_ros_imu SHARED src/gazebo_ros_imu.cpp)
-ament_target_dependencies(gazebo_ros_imu ${dependencies})
-
 # botanbot GAZEBO WORLD TO OCTOMAP PLUGIN SHARED LIBRARY
 add_library(gazebo_world_to_octomap SHARED src/gazebo_to_octomap.cpp)
 ament_target_dependencies(gazebo_world_to_octomap ${dependencies})
@@ -117,10 +99,6 @@ add_library(gazebo_world_to_pointcloud SHARED src/gazebo_to_pointcloud.cpp)
 ament_target_dependencies(gazebo_world_to_pointcloud ${dependencies})
 
 ament_export_libraries(botanbot_ackermann_drive 
-                       realsense_gazebo_plugin 
-                       gazebo_ros_velodyne_laser 
-                       gazebo_ros_gps
-                       gazebo_ros_imu
                        gazebo_world_to_octomap
                        gazebo_world_to_pointcloud)
 ################################################################################
@@ -128,10 +106,6 @@ ament_export_libraries(botanbot_ackermann_drive
 ################################################################################
 install(TARGETS 
         botanbot_ackermann_drive
-        realsense_gazebo_plugin
-        gazebo_ros_velodyne_laser
-        gazebo_ros_gps
-        gazebo_ros_imu
         gazebo_world_to_octomap
         gazebo_world_to_pointcloud
         ARCHIVE DESTINATION lib
