@@ -19,11 +19,16 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import ExecuteProcess
 from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument
+from launch_ros.actions import Node
+
 
 GAZEBO_WORLD = os.environ['GAZEBO_WORLD']
 
 
 def generate_launch_description():
+    
+    botanbot_bringup_dir = get_package_share_directory('botanbot_bringup')
+    twist_mux_config = LaunchConfiguration('twist_mux_config')
 
     declare_simulator_cmd = DeclareLaunchArgument(
         'headless',
@@ -46,5 +51,15 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(
                 [launch_file_dir, '/robot_state_publisher.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time}.items(),
+        ),
+
+        IncludeLaunchDescription(PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory('teleop_twist_joy'), 'launch', 'teleop-launch.py')),
+            launch_arguments={
+            'joy_config': 'xbox',
+        }.items()),
+
+        IncludeLaunchDescription(PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory('twist_mux'), 'launch', 'twist_mux_launch.py')),
         )
     ])

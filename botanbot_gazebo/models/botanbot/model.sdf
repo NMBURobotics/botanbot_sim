@@ -439,7 +439,7 @@
         <plugin name='botanbot_ackermann_drive' filename='libbotanbot_ackermann_drive.so'>
             <ros>
                 <namespace />
-                <remapping>cmd_vel:=vox_nav/cmd_vel</remapping>
+                <remapping>cmd_vel:=/cmd_vel</remapping>
                 <remapping>odom:=odometry/wheel</remapping>
                 <remapping>distance:=distance</remapping>
             </ros>
