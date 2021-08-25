@@ -26,14 +26,11 @@ GAZEBO_WORLD = os.environ['GAZEBO_WORLD']
 
 
 def generate_launch_description():
-    
-    botanbot_bringup_dir = get_package_share_directory('botanbot_bringup')
-    twist_mux_config = LaunchConfiguration('twist_mux_config')
 
-    declare_simulator_cmd = DeclareLaunchArgument(
-        'headless',
-        default_value='False',
-        description='Whether to execute gzclient)')
+    botanbot_bringup_dir = get_package_share_directory('botanbot_bringup')
+
+    joy_config_filepath = LaunchConfiguration(
+        'config_filepath', default=os.path.join(botanbot_bringup_dir, 'params', 'xbox.yaml'))
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     world_file_name = GAZEBO_WORLD + '/' + GAZEBO_WORLD + '.world'
@@ -43,21 +40,24 @@ def generate_launch_description():
         get_package_share_directory('botanbot_gazebo'), 'launch')
 
     return LaunchDescription([
+
         ExecuteProcess(cmd=[
             'gazebo', '--verbose', world, '-s', 'libgazebo_ros_factory.so'
         ],
-                       output='screen'),
+            output='screen'),
+
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 [launch_file_dir, '/robot_state_publisher.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time}.items(),
         ),
 
-        IncludeLaunchDescription(PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory('teleop_twist_joy'), 'launch', 'teleop-launch.py')),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                [os.path.join(get_package_share_directory('teleop_twist_joy'), 'launch', 'teleop-launch.py')]),
             launch_arguments={
-            'joy_config': 'xbox',
-        }.items()),
+                'config_filepath': joy_config_filepath}.items()
+        ),
 
         IncludeLaunchDescription(PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory('twist_mux'), 'launch', 'twist_mux_launch.py')),

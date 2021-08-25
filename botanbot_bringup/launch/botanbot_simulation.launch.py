@@ -43,7 +43,7 @@ def generate_launch_description():
     use_robot_state_pub = LaunchConfiguration('use_robot_state_pub')
     headless = LaunchConfiguration('headless')
     world = LaunchConfiguration('world')
-    twist_mux_config = LaunchConfiguration('twist_mux_config')
+    joy_config_filepath = LaunchConfiguration('config_filepath')
 
     urdf = os.path.join(get_package_share_directory('botanbot_description'),
                         'urdf/botanbot.urdf')
@@ -107,10 +107,10 @@ def generate_launch_description():
             GAZEBO_WORLD, GAZEBO_WORLD + '.world'),
         description='Full path to world model file to load')
 
-    decleare_twist_mux_config = DeclareLaunchArgument(
-        'twist_mux_config',
+    declare_joy_config_filepath = DeclareLaunchArgument(
+        'config_filepath',
         default_value=os.path.join(
-            get_package_share_directory('botanbot_bringup'), 'config', 'twist_mux.yaml'),
+            get_package_share_directory('botanbot_bringup'), 'params', 'xbox.yaml'),
         description='path to locks params.')
 
     # Specify the actions
@@ -148,11 +148,12 @@ def generate_launch_description():
         'use_sim_time': use_sim_time,
     }.items())
 
-    joy_config_cmd = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        os.path.join(get_package_share_directory('teleop_twist_joy'), 'launch', 'teleop-launch.py')),
+    joy_config_cmd = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [os.path.join(get_package_share_directory('teleop_twist_joy'), 'launch', 'teleop-launch.py')]),
         launch_arguments={
-        'joy_config': 'xbox',
-    }.items())
+            'config_filepath': joy_config_filepath}.items()
+    )
 
     twist_mux_cmd = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(get_package_share_directory('twist_mux'), 'launch', 'twist_mux_launch.py')),
@@ -173,7 +174,7 @@ def generate_launch_description():
     ld.add_action(declare_use_rviz_cmd)
     ld.add_action(declare_simulator_cmd)
     ld.add_action(declare_world_cmd)
-    ld.add_action(decleare_twist_mux_config)
+    ld.add_action(declare_joy_config_filepath)
 
     ld.add_action(start_gazebo_server_cmd)
     ld.add_action(start_gazebo_client_cmd)
