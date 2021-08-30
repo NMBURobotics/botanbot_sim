@@ -51,6 +51,19 @@
                 </constraints>
             </ode>
         </physics>
+
+        <gravity>0 0 -9.8</gravity>
+        <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+        <atmosphere type='adiabatic' />
+        <wind />
+        <spherical_coordinates>
+            <surface_model>EARTH_WGS84</surface_model>
+            <latitude_deg>0</latitude_deg>
+            <longitude_deg>0</longitude_deg>
+            <elevation>0</elevation>
+            <heading_deg>0</heading_deg>
+        </spherical_coordinates>
+        
         <include>
             <pose>0 0 0.2 0.0 0.0 0</pose>
             <uri>model://botanbot</uri>
@@ -71,17 +84,5 @@
             <pose>0 0 0 0 0 0 </pose>
             <uri>model://ground_container_office</uri>
         </include>
-        <gravity>0 0 -9.8</gravity>
-        <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
-        <atmosphere type='adiabatic' />
-        <wind />
-        <spherical_coordinates>
-            <surface_model>EARTH_WGS84</surface_model>
-            <latitude_deg>0</latitude_deg>
-            <longitude_deg>0</longitude_deg>
-            <elevation>0</elevation>
-            <heading_deg>0</heading_deg>
-        </spherical_coordinates>
-
     </world>
 </sdf>
