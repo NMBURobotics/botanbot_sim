@@ -1019,6 +1019,11 @@ background-color: rgb(245, 121, 0, 56);</string>
         <string>tomato_field_world</string>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>container_office_world</string>
+       </property>
+      </item>
      </widget>
      <widget class="QLabel" name="label">
       <property name="geometry">

@@ -53,7 +53,7 @@ def generate_launch_description():
     decleare_params = DeclareLaunchArgument(
         'params',
         default_value=os.path.join(
-            botanbot_bringup_dir, 'params', 'params.yaml'),
+            botanbot_bringup_dir, 'params', 'params_container_office.yaml'),
         description='Path to the vox_nav parameters file.')
 
     decleare_localization_params = DeclareLaunchArgument(
@@ -143,6 +143,7 @@ def generate_launch_description():
         os.path.join(vox_nav_bringup_dir, 'launch', 'bringup_vox_nav.launch.py')),
         launch_arguments={
         'params': params,
+        'localization_params': localization_params,
         'namespace': namespace,
         'use_namespace': use_namespace,
         'use_sim_time': use_sim_time,

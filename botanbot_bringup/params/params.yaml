@@ -117,9 +117,9 @@ vox_nav_map_server_rclcpp_node:
     utm_frame_id: "utm"
     yaw_offset: 1.57                                                         # see navsat_transform_node from robot_localization, this offset is needed to recorrect orientation of static map
     map_datum:
-      latitude: 49.89999996757017
-      longitude: 8.899999997371747
-      altitude: 1.6
+      latitude: 59.664230
+      longitude: 10.762824
+      altitude: 0.0
       quaternion:
         x: -0.0001960611448920198
         y: -0.003682083159658604

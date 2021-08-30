@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="ground_container_office">
+    <pose>0 0 0 0 0 0</pose>
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://ground_container_office/meshes/ground_container_office.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>200</mu>
+              <mu2>100</mu2>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+              <kp>10000000.0</kp>
+              <kd>1.0</kd>
+          </ode>
+          </friction>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <kp>1e9</kp>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://ground_container_office/meshes/ground_container_office.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://ground_container_office/materials/scripts</uri>
+            <uri>model://ground_container_office/materials/textures</uri>
+            <name>ground_container_office/ground_container_office</name>
+          </script>
+          <shader type='pixel' />
+          <emissive>0 0 0 1</emissive>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

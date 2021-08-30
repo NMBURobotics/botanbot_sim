@@ -407,6 +407,7 @@
         <child link="wide_angle_camera_link" />
         <pose xyz="0.3 0.0 0.9" rpy="0 0 0" />
     </joint>
+
     <!-- END JOINTS RELATED TO SENSORS    -->
     <!--//////////////////////////////////-->
     <!-- END JOINTS                       -->

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<sdf version='1.7'>
+    <world name='container_office_world'>
+        <light name='sun' type='directional'>
+            <cast_shadows>1</cast_shadows>
+            <pose>0 0 10 0 -0 0</pose>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+            <attenuation>
+                <range>1000</range>
+                <constant>0.9</constant>
+                <linear>0.01</linear>
+                <quadratic>0.001</quadratic>
+            </attenuation>
+            <direction>-0.5 0.1 -0.9</direction>
+            <spot>
+                <inner_angle>0</inner_angle>
+                <outer_angle>0</outer_angle>
+                <falloff>0</falloff>
+            </spot>
+        </light>
+        <scene>
+            <shadows>0</shadows>
+            <ambient>0.4 0.4 0.4 1</ambient>
+            <background>0.7 0.7 0.7 1</background>
+        </scene>
+        <gui fullscreen='0'>
+            <camera name='user_camera'>
+                <pose>123.421 9.63387 166.024 -0 0.965801 3.06865</pose>
+                <view_controller>orbit</view_controller>
+                <projection_type>perspective</projection_type>
+            </camera>
+        </gui>
+        <physics type='ode'>
+            <real_time_update_rate>1000</real_time_update_rate>
+            <max_step_size>0.001</max_step_size>
+            <real_time_factor>1</real_time_factor>
+            <ode>
+                <solver>
+                    <type>quick</type>
+                    <iters>50</iters>
+                    <precon_iters>0</precon_iters>
+                    <sor>1.4</sor>
+                    <use_dynamic_moi_rescaling>1</use_dynamic_moi_rescaling>
+                </solver>
+                <constraints>
+                    <cfm>0</cfm>
+                    <erp>0.2</erp>
+                    <contact_max_correcting_vel>100</contact_max_correcting_vel>
+                    <contact_surface_layer>0.001</contact_surface_layer>
+                </constraints>
+            </ode>
+        </physics>
+        <include>
+            <pose>0 0 0.2 0.0 0.0 0</pose>
+            <uri>model://botanbot</uri>
+        </include>
+
+        <include>
+            <pose>0.0 0 0.0 0.0 0.0 0.0</pose>
+            <uri>model://full_sensor_suite</uri>
+        </include>
+        <plugin name="sensor_base_attacher_plugin" filename="libsensor_base_attacher_plugin.so">
+            <robot_model_name>botanbot</robot_model_name>
+            <robot_base_link_name>base_link</robot_base_link_name>
+            <sensor_suite_model_name>full_sensor_suite</sensor_suite_model_name>
+            <sensor_suite_base_link_name>base_sensor_link</sensor_suite_base_link_name>
+        </plugin>
+ 
+        <include>
+            <pose>0 0 0 0 0 0 </pose>
+            <uri>model://ground_container_office</uri>
+        </include>
+        <gravity>0 0 -9.8</gravity>
+        <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+        <atmosphere type='adiabatic' />
+        <wind />
+        <spherical_coordinates>
+            <surface_model>EARTH_WGS84</surface_model>
+            <latitude_deg>0</latitude_deg>
+            <longitude_deg>0</longitude_deg>
+            <elevation>0</elevation>
+            <heading_deg>0</heading_deg>
+        </spherical_coordinates>
+
+    </world>
+</sdf>
