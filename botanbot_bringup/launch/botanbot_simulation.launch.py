@@ -37,18 +37,11 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     use_namespace = LaunchConfiguration('use_namespace')
     use_sim_time = LaunchConfiguration('use_sim_time')
-
-    # Launch configuration variables specific to simulation
     use_simulator = LaunchConfiguration('use_simulator')
     use_robot_state_pub = LaunchConfiguration('use_robot_state_pub')
     headless = LaunchConfiguration('headless')
     world = LaunchConfiguration('world')
     joy_config_filepath = LaunchConfiguration('config_filepath')
-
-    urdf = os.path.join(get_package_share_directory('botanbot_description'),
-                        'urdf/botanbot.urdf')
-
-    remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static')]
 
     decleare_params = DeclareLaunchArgument(
         'params',
@@ -110,10 +103,10 @@ def generate_launch_description():
     declare_joy_config_filepath = DeclareLaunchArgument(
         'config_filepath',
         default_value=os.path.join(
-            get_package_share_directory('botanbot_bringup'), 'params', 'xbox.yaml'),
+            botanbot_bringup_dir, 'params', 'xbox.yaml'),
         description='path to locks params.')
 
-    # Specify the actions
+    # EXECUTE GAZEBO PROCESS
     start_gazebo_server_cmd = ExecuteProcess(
         condition=IfCondition(use_simulator),
         cmd=['gzserver', '-s', 'libgazebo_ros_init.so', world],
@@ -126,6 +119,10 @@ def generate_launch_description():
         cwd=[os.path.join(botanbot_bringup_dir, 'launch')],
         output='screen')
 
+    # ROBOT STATE PUBLISHER NODE
+    urdf = os.path.join(get_package_share_directory('botanbot_description'),
+                        'urdf/botanbot.urdf')
+    remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static')]
     start_robot_state_publisher_cmd = Node(
         condition=IfCondition(use_robot_state_pub),
         package='robot_state_publisher',
@@ -139,16 +136,19 @@ def generate_launch_description():
         remappings=remappings,
         arguments=[urdf])
 
-    bringup_cmd = IncludeLaunchDescription(PythonLaunchDescriptionSource(
+    # BRING UP VOX NAV RELATED LAUNXH FILES
+    bringup_vox_nav_cmd = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(vox_nav_bringup_dir, 'launch', 'bringup_vox_nav.launch.py')),
         launch_arguments={
         'params': params,
         'localization_params': localization_params,
+        'rviz_config': rviz_config,
         'namespace': namespace,
         'use_namespace': use_namespace,
         'use_sim_time': use_sim_time,
     }.items())
 
+    # CALL JOYSTICK TELEOP
     joy_config_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [os.path.join(get_package_share_directory('teleop_twist_joy'), 'launch', 'teleop-launch.py')]),
@@ -156,6 +156,7 @@ def generate_launch_description():
             'config_filepath': joy_config_filepath}.items()
     )
 
+    # TWIST MUX FOR MIXING MULTIPLE CMD VEL COMMANDS
     twist_mux_cmd = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(get_package_share_directory('twist_mux'), 'launch', 'twist_mux_launch.py')),
     )
@@ -176,13 +177,11 @@ def generate_launch_description():
     ld.add_action(declare_simulator_cmd)
     ld.add_action(declare_world_cmd)
     ld.add_action(declare_joy_config_filepath)
-
+    # Add actions
     ld.add_action(start_gazebo_server_cmd)
     ld.add_action(start_gazebo_client_cmd)
-
-    # Add the actions to launch all of the vox_nav nodes
     ld.add_action(start_robot_state_publisher_cmd)
-    ld.add_action(bringup_cmd)
+    ld.add_action(bringup_vox_nav_cmd)
     ld.add_action(twist_mux_cmd)
     ld.add_action(joy_config_cmd)
 
