@@ -80,7 +80,7 @@ vox_nav_controller_server_rclcpp_node:
 
 vox_nav_map_server_rclcpp_node:
   ros__parameters:
-    pcd_map_filename: /home/atas/cloudSurf.pcd # Provide a PCD format map
+    pcd_map_filename: /home/atas/colcon_ws/src/botanbot_sim/botanbot_bringup/maps/container_office_map.pcd # Provide a PCD format map
     # PCD PREPROCESS PARAMS
     pcd_map_downsample_voxel_size: 0.25                                       # Set to smaller if you do not want downsample pointclouds of the map
     pcd_map_transform:                                                        # Apply an OPTIONAL rigid-body transrom to pcd file, leave to all zeros if not wished
