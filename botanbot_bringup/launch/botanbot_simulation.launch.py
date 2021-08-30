@@ -46,13 +46,13 @@ def generate_launch_description():
     decleare_params = DeclareLaunchArgument(
         'params',
         default_value=os.path.join(
-            botanbot_bringup_dir, 'params', 'params_container_office.yaml'),
+            botanbot_bringup_dir, 'params', 'vox_nav_container_office_params.yaml'),
         description='Path to the vox_nav parameters file.')
 
     decleare_localization_params = DeclareLaunchArgument(
         'localization_params',
         default_value=os.path.join(
-            botanbot_bringup_dir, 'params', 'localization_params.yaml'),
+            botanbot_bringup_dir, 'params', 'robot_localization_params.yaml'),
         description='Path to the localization parameters file.')
 
     decleare_rviz_config = DeclareLaunchArgument(
@@ -103,7 +103,7 @@ def generate_launch_description():
     declare_joy_config_filepath = DeclareLaunchArgument(
         'config_filepath',
         default_value=os.path.join(
-            botanbot_bringup_dir, 'params', 'xbox.yaml'),
+            botanbot_bringup_dir, 'params', 'joystick_xbox.yaml'),
         description='path to locks params.')
 
     # EXECUTE GAZEBO PROCESS

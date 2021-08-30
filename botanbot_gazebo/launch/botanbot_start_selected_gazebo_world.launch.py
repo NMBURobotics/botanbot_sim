@@ -30,7 +30,7 @@ def generate_launch_description():
     botanbot_bringup_dir = get_package_share_directory('botanbot_bringup')
 
     joy_config_filepath = LaunchConfiguration(
-        'config_filepath', default=os.path.join(botanbot_bringup_dir, 'params', 'xbox.yaml'))
+        'config_filepath', default=os.path.join(botanbot_bringup_dir, 'params', 'joystick_xbox.yaml'))
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     world_file_name = GAZEBO_WORLD + '/' + GAZEBO_WORLD + '.world'
