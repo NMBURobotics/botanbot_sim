@@ -63,6 +63,11 @@
             <elevation>0</elevation>
             <heading_deg>0</heading_deg>
         </spherical_coordinates>
+
+        <include>
+            <pose>0 0 0 0 0 0 </pose>
+            <uri>model://ground_container_office</uri>
+        </include>
         
         <include>
             <pose>0 0 0.2 0.0 0.0 0</pose>
@@ -79,10 +84,6 @@
             <sensor_suite_model_name>full_sensor_suite</sensor_suite_model_name>
             <sensor_suite_base_link_name>base_sensor_link</sensor_suite_base_link_name>
         </plugin>
- 
-        <include>
-            <pose>0 0 0 0 0 0 </pose>
-            <uri>model://ground_container_office</uri>
-        </include>
+
     </world>
 </sdf>
