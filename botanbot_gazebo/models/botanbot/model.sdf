@@ -440,7 +440,7 @@
             <ros>
                 <namespace />
                 <remapping>cmd_vel:=/cmd_vel</remapping>
-                <remapping>odom:=odometry/wheel</remapping>
+                <remapping>odom:=odometry/gazebo</remapping>
                 <remapping>distance:=distance</remapping>
             </ros>
             <update_rate>60.0</update_rate>
