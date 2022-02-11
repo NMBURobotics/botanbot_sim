@@ -82,10 +82,8 @@ set(dependencies
 add_library(botanbot_ackermann_drive SHARED  src/botanbot_ackermann_drive.cpp)
 target_include_directories(botanbot_ackermann_drive PUBLIC include)
 ament_target_dependencies(botanbot_ackermann_drive ${dependencies})
-if(ENABLE_PROFILER)
-  target_include_directories(botanbot_ackermann_drive PUBLIC ${ignition-common3_INCLUDE_DIRS})
-  target_link_libraries(botanbot_ackermann_drive ${ignition-common3_LIBRARIES})
-endif()
+target_include_directories(botanbot_ackermann_drive PUBLIC ${ignition-common3_INCLUDE_DIRS})
+target_link_libraries(botanbot_ackermann_drive ${ignition-common3_LIBRARIES})
 
 # botanbot GAZEBO WORLD TO OCTOMAP PLUGIN SHARED LIBRARY
 add_library(gazebo_world_to_octomap SHARED src/gazebo_to_octomap.cpp)
