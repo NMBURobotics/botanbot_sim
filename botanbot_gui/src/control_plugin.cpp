@@ -157,6 +157,9 @@ namespace botanbot_gui
     twist.linear.x = speed;
     twist.angular.z = turn;
     cmd_vel_publisher_->publish(twist);
+
+    std::cout << "Cancelling all goals" << std::endl;
+    robot_controller_->cancelGoals();
   }
 
   void ControlPlugin::onCancelAllGoals()
