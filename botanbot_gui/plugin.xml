@@ -9,9 +9,9 @@
                 <icon type="theme">folder</icon>
                 <statustip>Plugins related to visualization.</statustip>
             </group>
-            <label>Control Plugin</label>
+            <label>Botanbot Control Plugin</label>
             <icon type="theme">image-x-generic</icon>
-            <statustip>A GUI plugin for viewing sensor_msgs/Image topics.</statustip>
+            <statustip>A GUI plugin for Botanbot.</statustip>
         </qtgui>
     </class>
 </library>
