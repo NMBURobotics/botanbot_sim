@@ -112,7 +112,7 @@ namespace botanbot_gui
      * @brief starts only RVIZ standalone
      *
      */
-    virtual void onRvizButtonClick();
+    virtual void onVoxnavButtonClick();
 
     /**
      * @brief Terminates all ACTIVE ROS2 nodes

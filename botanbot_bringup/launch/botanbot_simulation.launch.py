@@ -105,7 +105,8 @@ def generate_launch_description():
         default_value=os.path.join(
             botanbot_bringup_dir, 'params', 'joystick_xbox.yaml'),
         description='path to locks params.')
-
+    print(os.path.join(get_package_share_directory('botanbot_gazebo'),
+                       'worlds/', GAZEBO_WORLD, GAZEBO_WORLD+'.world'))
     # EXECUTE GAZEBO PROCESS
     start_gazebo_server_cmd = ExecuteProcess(
         condition=IfCondition(use_simulator),

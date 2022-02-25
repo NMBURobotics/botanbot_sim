@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
-<robot name="botanbot"
-    xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="botanbot" xmlns:xacro="http://ros.org/wiki/xacro">
     <!-- BEGIN LINKS                      -->
     <!-- BEGIN LINKS RELATED TO ROBOT BODY-->
     <link name="base_link">
         <visual>
             <origin xyz="-0.019375 0.005287 0.340756" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/base_simplified.stl"/>
+                <mesh filename="package://botanbot_description/meshes/base_simplified.stl" />
             </geometry>
             <material name="Cyan">
                 <color rgba="0 1.0 1.0 1.0" />
@@ -16,7 +15,7 @@
         <collision>
             <origin xyz="-0.019375 0.005287 0.340756" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/base_simplified.stl"/>
+                <mesh filename="package://botanbot_description/meshes/base_simplified.stl" />
             </geometry>
         </collision>
     </link>
@@ -135,7 +134,7 @@
             </geometry>
         </collision>
     </link>
-    <link name="velodyne_link">
+    <link name="lidar_data_link">
         <visual>
             <geometry>
                 <mesh filename="package://botanbot_description/meshes/lidar.stl" scale="0.001 0.001 0.001" />
@@ -162,19 +161,19 @@
     <link name="camera_bottom_screw_frame">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" />
             </geometry>
         </visual>
         <collision>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" />
             </geometry>
         </collision>
     </link>
     <link name="camera_link">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
@@ -186,7 +185,7 @@
     <link name="camera_depth_frame">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
@@ -198,7 +197,7 @@
     <link name="camera_depth_optical_frame">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
@@ -210,86 +209,86 @@
     <link name="camera_color_frame">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
             <geometry>
                 <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
-        </collision>        
+        </collision>
     </link>
     <link name="camera_color_optical_frame">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
             <geometry>
                 <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
-        </collision>        
+        </collision>
     </link>
     <link name="camera_left_ir_frame">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
             <geometry>
                 <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
-        </collision>        
+        </collision>
     </link>
     <link name="camera_left_ir_optical_frame">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
             <geometry>
                 <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
-        </collision>        
+        </collision>
     </link>
     <link name="camera_right_ir_frame">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
             <geometry>
                 <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
-        </collision>        
+        </collision>
     </link>
     <link name="camera_right_ir_optical_frame">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
             <geometry>
                 <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
-        </collision>        
+        </collision>
     </link>
     <link name="wide_angle_camera_link">
         <visual>
             <geometry>
-                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001"/>
+                <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
         </visual>
         <collision>
             <geometry>
                 <mesh filename="package://botanbot_description/meshes/d435.dae" scale="0.0001 0.0001 0.0001" />
             </geometry>
-        </collision>        
+        </collision>
     </link>
     <!-- END LINKS RELATED TO SENSORS       -->
     <!-- END LINKS                          -->
@@ -312,7 +311,7 @@
         <parent link="base_link" />
         <child link="rear_axle" />
         <origin xyz="-0.656403 0.001088 -0.085593" rpy="0 0 1.57" />
-        <dynamics damping="2000.0" friction="0.0"/>
+        <dynamics damping="2000.0" friction="0.0" />
         <limit effort="0" velocity="0.0" lower="-0.05" upper="0.05" />
         <axis xyz="0 1 0" />
     </joint>
@@ -344,7 +343,7 @@
     </joint>
     <joint name="velodyne_joint" type="fixed">
         <parent link="base_link" />
-        <child link="velodyne_link" />
+        <child link="lidar_data_link" />
         <origin xyz="0 0 0.9" rpy="0 0 0" />
     </joint>
     <joint name="gps_joint" type="fixed">

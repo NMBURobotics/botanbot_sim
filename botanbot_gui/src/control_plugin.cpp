@@ -63,10 +63,10 @@ namespace botanbot_gui
       ui_.startGazeboNavigationFull, SIGNAL(pressed()), this,
       SLOT(onGazeboNavigationFullButtonClick()));
 
-    ui_.startRviz->setIcon(QIcon::fromTheme("call-start"));
+    ui_.startVoxnav->setIcon(QIcon::fromTheme("call-start"));
     connect(
-      ui_.startRviz, SIGNAL(pressed()), this,
-      SLOT(onRvizButtonClick()));
+      ui_.startVoxnav, SIGNAL(pressed()), this,
+      SLOT(onVoxnavButtonClick()));
 
     ui_.terminate->setIcon(QIcon::fromTheme("call-start"));
     connect(
@@ -287,29 +287,33 @@ namespace botanbot_gui
       ament_index_cpp::get_package_share_directory("botanbot_gui");
 
     std::string bash_files_dir = botanbot_gui_package_path +
-      "/../../scripts/start_selected_gazebo_navigation_full.sh";
+      "/../../scripts/start_selected_gazebo_navigation2.sh";
     std::string make_bash_files_executable_command = "chmod +x " +
       bash_files_dir;
     system(make_bash_files_executable_command.c_str());
 
     std::string bringup_command =
-      botanbot_gui_package_path + "/../../scripts/start_selected_gazebo_navigation_full.sh " +
+      botanbot_gui_package_path + "/../../scripts/start_selected_gazebo_navigation2.sh " +
       selected_gazebo_world_name;
     system(bringup_command.c_str());
   }
 
-  void ControlPlugin::onRvizButtonClick()
+  void ControlPlugin::onVoxnavButtonClick()
   {
+    // get string text of selected robot
+    std::string selected_gazebo_world_name = ui_.gazebo_city_combobox->currentText().toStdString();
+
     std::string this_package_path =
       ament_index_cpp::get_package_share_directory("botanbot_gui");
 
     std::string this_package_bash_files_dir =
-      this_package_path + "/../../scripts/rviz.sh";
+      this_package_path + "/../../scripts/start_selected_gazebo_vox_nav.sh";
     std::string this_package_make_bash_files_executable_command = "chmod +x " +
       this_package_bash_files_dir;
     system(this_package_make_bash_files_executable_command.c_str());
 
-    std::string bringup_command = this_package_path + "/../../scripts/rviz.sh";
+    std::string bringup_command = this_package_path +
+      "/../../scripts/start_selected_gazebo_vox_nav.sh " + selected_gazebo_world_name;
     system(bringup_command.c_str());
   }
 

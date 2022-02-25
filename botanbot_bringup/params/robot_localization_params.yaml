@@ -6,7 +6,7 @@ ekf_local_filter_node:
     filter_type: "ukf"
     frequency: 30.0
     sensor_timeout: 0.1
-    odom0: /odometry/gazebo
+    odom0: /odometry/base_raw
     imu0: /imu/data
     odom_frame: odom
     base_link_frame: base_link
@@ -53,7 +53,7 @@ ekf_global_filter_node:
     filter_type: "ukf"
     frequency: 30.0
     sensor_timeout: 0.1
-    odom0: /odometry/gazebo
+    odom0: /odometry/base_raw
     odom1: /odometry/gps
     odom2: /openvslam/odometry
     imu0: /imu/data

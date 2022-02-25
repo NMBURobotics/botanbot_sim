@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1504</width>
+    <width>1491</width>
     <height>1389</height>
    </rect>
   </property>
@@ -70,7 +70,7 @@
            <string notr="true">background-color: rgba(52, 101, 164,100);</string>
           </property>
           <property name="text">
-           <string>START SELECTED GAZEBO WITH NAV2 FULL</string>
+           <string>START SELECTED GAZEBO WITH NAV2 </string>
           </property>
          </widget>
         </widget>
@@ -78,12 +78,12 @@
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <widget class="QPushButton" name="startRviz">
+         <widget class="QPushButton" name="startVoxnav">
           <property name="styleSheet">
            <string notr="true">background-color: rgba(52, 101, 164,100);</string>
           </property>
           <property name="text">
-           <string>START START RVIZ</string>
+           <string>START SELECTED GAZEBO WITH VOX_NAV </string>
           </property>
          </widget>
          <widget class="QPushButton" name="terminate">
