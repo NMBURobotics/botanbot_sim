@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="sensor_frames">
+
+  <link name="base_link" />
+  <link name="base_sensor_link" />
+  <link name="imu_link"></link>
+  <link name="velodyne_link"></link>
+  <link name="gps_link"></link>
+  <link name="camera_bottom_screw_frame"></link>
+  <link name="camera_link"></link>
+  <link name="camera_depth_frame"></link>
+  <link name="camera_depth_optical_frame"></link>
+  <link name="camera_color_frame"></link>
+  <link name="camera_color_optical_frame"></link>
+  <link name="camera_left_ir_frame"></link>
+  <link name="camera_left_ir_optical_frame"></link>
+  <link name="camera_right_ir_frame"></link>
+  <link name="camera_right_ir_optical_frame"></link>
+  <link name="wide_angle_camera_link"></link>
+
+  <joint name="base_sensor_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="base_sensor_link" />
+    <origin xyz="0 0 4.2" rpy="0 0 0" />
+  </joint>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_sensor_link" />
+    <child link="imu_link" />
+    <origin xyz="0 0 1.2" rpy="0 0 0" />
+  </joint>
+  <joint name="velodyne_joint" type="fixed">
+    <parent link="base_sensor_link" />
+    <child link="velodyne_link" />
+    <origin xyz="0 0 0.9" rpy="0 0 0" />
+  </joint>
+  <joint name="gps_joint" type="fixed">
+    <parent link="base_sensor_link" />
+    <child link="gps_link" />
+    <origin xyz="0 0 0.4" rpy="0 0 0" />
+  </joint>
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_sensor_link" />
+    <child link="camera_bottom_screw_frame" />
+    <pose xyz="0.3 0.0 0.8" rpy="0 0 0" />
+  </joint>
+  <joint name="camera_link_joint" type="fixed">
+    <parent link="camera_bottom_screw_frame" />
+    <child link="camera_link" />
+    <pose xyz="0 0.0175 0.0125 " rpy="0 0 0" />
+  </joint>
+  <joint name="camera_depth_joint" type="fixed">
+    <parent link="camera_link" />
+    <child link="camera_depth_frame" />
+    <pose xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="camera_depth_optical_joint" type="fixed">
+    <parent link="camera_depth_frame" />
+    <child link="camera_depth_optical_frame" />
+    <pose xyz="0 0 0 " rpy="-1.57 0 -1.57" />
+  </joint>
+  <joint name="camera_color_joint" type="fixed">
+    <parent link="camera_depth_frame" />
+    <child link="camera_color_frame" />
+    <pose xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="camera_color_optical_joint" type="fixed">
+    <parent link="camera_color_frame" />
+    <child link="camera_color_optical_frame" />
+    <pose xyz="0 0 0 " rpy="-1.57 0 -1.57" />
+  </joint>
+  <joint name="camera_left_ir_joint" type="fixed">
+    <parent link="camera_depth_frame" />
+    <child link="camera_left_ir_frame" />
+    <pose xyz="0 0 0 " rpy="0 0 0 " />
+  </joint>
+  <joint name="camera_left_ir_optical_joint" type="fixed">
+    <parent link="camera_left_ir_frame" />
+    <child link="camera_left_ir_optical_frame" />
+    <pose xyz="0 0 0 " rpy="-1.57 0 -1.57" />
+  </joint>
+  <joint name="camera_right_ir_joint" type="fixed">
+    <parent link="camera_depth_frame" />
+    <child link="camera_right_ir_frame" />
+    <pose xyz="0 -0.050 0 " rpy="0 0 0" />
+  </joint>
+  <joint name="camera_right_ir_optical_joint" type="fixed">
+    <parent link="camera_right_ir_frame" />
+    <child link="camera_right_ir_optical_frame" />
+    <pose xyz="0 0 0 " rpy="-1.57 0 -1.57" />
+  </joint>
+  <joint name="wide_angle_camera_joint" type="fixed">
+    <parent link="base_sensor_link" />
+    <child link="wide_angle_camera_link" />
+    <pose xyz="0.3 0.0 0.9" rpy="0 0 0" />
+  </joint>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="base_sensor_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="imu_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="velodyne_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="gps_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_bottom_screw_frame">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_depth_frame">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_depth_optical_frame">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_color_frame">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_color_optical_frame">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_left_ir_frame">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_left_ir_optical_frame">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_right_ir_frame">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="camera_right_ir_optical_frame">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="wide_angle_camera_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+</robot>
