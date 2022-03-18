@@ -109,7 +109,7 @@ namespace botanbot_gui
      */
     timer_->start(100);
     timer_->connect(timer_, SIGNAL(timeout()), this, SLOT(teleoperation()));
-    timer_->connect(timer_, SIGNAL(timeout()), this, SLOT(updateRobotStates()));
+    //timer_->connect(timer_, SIGNAL(timeout()), this, SLOT(updateRobotStates()));
 
     cmd_vel_publisher_ =
       node_->create_publisher<geometry_msgs::msg::Twist>("/vox_nav/cmd_vel", 10);
@@ -159,7 +159,7 @@ namespace botanbot_gui
     cmd_vel_publisher_->publish(twist);
 
     std::cout << "Cancelling all goals" << std::endl;
-    robot_controller_->cancelGoals();
+    //robot_controller_->cancelGoals();
   }
 
   void ControlPlugin::onCancelAllGoals()
