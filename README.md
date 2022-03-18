@@ -1,7 +1,7 @@
 # botanbot_sim
 
 Simulation of a Ackermann robot for agricultural cases. 
-It is also a use-case of [vox_nav](https://github.com/jediofgever/vox_nav) 2.5D navigation frmaework. 
+It is also a use-case of [vox_nav](https://github.com/jediofgever/vox_nav) 2.5D navigation framework. 
 Refer to [vox_nav](https://github.com/jediofgever/vox_nav) to find out more about vox_nav.
 
 # running botanbot
