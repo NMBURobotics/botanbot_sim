@@ -21,8 +21,9 @@
     <build_depend>tf2_geometry_msgs</build_depend>
     <build_depend>nav_msgs</build_depend>
     <build_depend>vox_nav_msgs</build_depend>
-    <build_depend>vox_nav_utilities</build_depend>
-
+    <!--
+        <build_depend>vox_nav_utilities</build_depend>
+     -->
     <exec_depend>geometry_msgs</exec_depend>
     <exec_depend>qtbase5-dev</exec_depend>
     <exec_depend>rqt_gui</exec_depend>
@@ -36,7 +37,9 @@
     <exec_depend>tf2_geometry_msgs</exec_depend>
     <exec_depend>nav_msgs</exec_depend>
     <exec_depend>vox_nav_msgs</exec_depend>
-    <exec_depend>vox_nav_utilities</exec_depend>
+    <!--
+        <exec_depend>vox_nav_utilities</exec_depend>
+     -->
     <export>
         <build_type>ament_cmake</build_type>
         <rqt_gui plugin="${prefix}/plugin.xml" />

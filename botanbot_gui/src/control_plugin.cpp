@@ -226,7 +226,7 @@ namespace botanbot_gui
 
   void ControlPlugin::updateRobotStates()
   {
-    geometry_msgs::msg::PoseStamped curr_pose;
+    /*geometry_msgs::msg::PoseStamped curr_pose;
     vox_nav_utilities::getCurrentPose(curr_pose, *tf_buffer_, "map", "base_link", 0.1);
     ui_.x->display(curr_pose.pose.position.x);
     ui_.y->display(curr_pose.pose.position.y);
@@ -238,7 +238,7 @@ namespace botanbot_gui
     tf2::Matrix3x3 m(quat);
     double roll, pitch, yaw;
     m.getRPY(roll, pitch, yaw);
-    ui_.theta->display(yaw * 180.0 / M_PI);
+    ui_.theta->display(yaw * 180.0 / M_PI);*/
   }
 
   void ControlPlugin::onToSpecificPoseButtonClick()

@@ -25,7 +25,7 @@ find_package(qt_gui_cpp REQUIRED)
 find_package(rqt_gui_cpp REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(vox_nav_msgs REQUIRED)
-find_package(vox_nav_utilities REQUIRED)
+#find_package(vox_nav_utilities REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(behaviortree_cpp_v3 REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets Test Concurrent)
@@ -56,7 +56,7 @@ set(library_name ${PROJECT_NAME})
 set(dependencies
     geometry_msgs
     vox_nav_msgs
-    vox_nav_utilities
+    #vox_nav_utilities
     nav_msgs
     pluginlib
     Qt5
