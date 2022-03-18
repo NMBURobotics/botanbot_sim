@@ -8,6 +8,8 @@
     <url type="repository">https://github.com/jediofgever/botanbot_sim</url>
     <buildtool_depend>ament_cmake</buildtool_depend>
     <depend>rclcpp</depend>
+
+    <build_depend>behaviortree_cpp_v3</build_depend>
     <build_depend>geometry_msgs</build_depend>
     <build_depend>qtbase5-dev</build_depend>
     <build_depend>rqt_gui</build_depend>
@@ -24,6 +26,8 @@
     <!--
         <build_depend>vox_nav_utilities</build_depend>
      -->
+
+    <exec_depend>behaviortree_cpp_v3</exec_depend>
     <exec_depend>geometry_msgs</exec_depend>
     <exec_depend>qtbase5-dev</exec_depend>
     <exec_depend>rqt_gui</exec_depend>
