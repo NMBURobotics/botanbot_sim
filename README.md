@@ -10,13 +10,16 @@ Note that the main branch is targeted to ROS2 Foxy version. Yoy can see steps un
 After sucessul build; 
 
 Follow the steps at [here](https://vox-nav.readthedocs.io/en/latest/running_project/index.html). 
-There is a simple GUI provided to start differnt gazebo worlds as well as teleoperate the botanbot.
+There is a simple GUI provided to start different gazebo worlds as well as to teleoperate the botanbot.
 
+After you select a Gazebo world, then click on Gazebo World StandAlone, to spawn the robot and start the simulation.
+You can also try with [navigation2](https://github.com/ros-planning/navigation2).
 
 # botanbot in action
 
 See the video below to get a insight of what botanbot looks like in action.  
 
 * [Botanbot Climbing Hill like A Champ with help of vox_nav](https://www.youtube.com/watch?v=ZQdy22LmeP0)
+* [Botanbot freely Roaming out of Boredom](https://www.youtube.com/watch?v=bW7AHrf01Qg)
 
-The robot is able to navigate through an uneven terrain.
+The botanbot is able to navigate through an uneven terrain(use `container_office_world` or `uneven_world`).
