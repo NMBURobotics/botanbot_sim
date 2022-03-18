@@ -1,0 +1,3 @@
+[submodule "ros2_full_sensor_suite"]
+	path = ros2_full_sensor_suite
+	url = https://github.com/NMBURobotics/ros2_full_sensor_suite.git
