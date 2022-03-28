@@ -15,8 +15,23 @@ There is a simple GUI provided to start different gazebo worlds as well as to te
 After you select a Gazebo world, then click on Gazebo World StandAlone, to spawn the robot and start the simulation.
 You can also try with [navigation2](https://github.com/ros-planning/navigation2).
 
-# botanbot in action
+## Alternatively run it in docker:
+Build with the image with:
+```console
+    docker build -t lcas.lincoln.ac.uk/lcas/botanbot_lcas:docker .
+```
+Run with:
+```console
+    docker-compose up
+```
+Open a browser and type: [localhost:6080](https://localhost:6080)
 
+Kill with:
+```console
+    docker-compose down
+```
+
+---
 See the video below to get a insight of what botanbot looks like in action.  
 
 * [Botanbot Climbing Hill like A Champ with help of vox_nav](https://www.youtube.com/watch?v=ZQdy22LmeP0)
