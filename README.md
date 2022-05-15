@@ -1,5 +1,7 @@
 # botanbot_sim
 
+Documentation is here ; https://botanbot-sim.readthedocs.io/en/latest/
+
 Simulation of a Ackermann robot for agricultural cases. 
 It is also a use-case of [vox_nav](https://github.com/jediofgever/vox_nav) 2.5D navigation framework. 
 Refer to [vox_nav](https://github.com/jediofgever/vox_nav) to find out more about vox_nav.
@@ -15,20 +17,22 @@ There is a simple GUI provided to start different gazebo worlds as well as to te
 After you select a Gazebo world, then click on Gazebo World StandAlone, to spawn the robot and start the simulation.
 You can also try with [navigation2](https://github.com/ros-planning/navigation2).
 
-## Alternatively run it in docker:
-Build with the image with:
+
+# Alternatively run it in docker
+
+Build the image with:
 ```console
-    docker build -t lcas.lincoln.ac.uk/lcas/botanbot_lcas:docker .
+docker build -t lcas.lincoln.ac.uk/lcas/botanbot_lcas:docker .
 ```
 Run with:
 ```console
-    docker-compose up
+docker-compose up
 ```
 Open a browser and type: [localhost:6080](https://localhost:6080)
 
 Kill with:
 ```console
-    docker-compose down
+docker-compose down
 ```
 
 ---

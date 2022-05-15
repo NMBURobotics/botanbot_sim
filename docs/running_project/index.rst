@@ -9,7 +9,7 @@ Running Project
 The project has a RQT GUI plugin that lets you to interact with robot. To start with this plugin make sure in previous sections you built project 
 successfully. 
 
-* source your colcon_ws and start the project with;
+* source your workspace and start the project with;
 
 .. code-block:: bash
 
@@ -35,7 +35,7 @@ Click on Control Plugin and you would be able to see;
 
 **1. Interact with GUI**
 
-Select a world that you would like to run te robot in then Click on Start Gazebo Stand Alone, to start botanbot simulation. 
+Select a world that you would like to run te robot in then Click on Start Gazebo Stand Alone to start botanbot simulation. 
 Note that the Gazebo worlds we use are large, so your computer needs to have an dedicated GPU,it takes apprx. 10 seconds for simulation to start in my case.
 After a while you should see Gazebo starting. 
 
