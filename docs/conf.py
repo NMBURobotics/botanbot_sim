@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'botanbot-sim'
+project = 'botanbot_sim'
 copyright = '2022, Fetullah Atas, Norwegian University of Life Sciences'
 author = 'Fetullah Atas'
 
