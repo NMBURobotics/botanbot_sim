@@ -7,8 +7,8 @@ Botanbot Sim
 ========================================
 
 Botanbot is a simple 4 wheeled , ackermann drived mobile robot.
-It is simulated under Gazebo with all required essential sensors in order to do outdoor navigation. The following table shows currently supported sensors. 
-
+It is simulated under Gazebo with all required essential sensors in order to do outdoor navigation. 
+The following table shows currently supported sensors. 
 
 **1. Sensor support for Botanbot**
 
@@ -61,8 +61,8 @@ It is simulated under Gazebo with all required essential sensors in order to do 
    :alt: rqt landing screen
 
 
-(botanbot_sim)[https://github.com/jediofgever/botanbot_sim] is configured use vox_nav system for 3D navigation. If you are trying to setup your robot for use with 
-vox_nav, botanbot_sim is  right place to look for.
-A RQT based gui is also provided in botanbot_gui, through this gui it is possible to send goal commands to action server(NavigateToPose) of vox_nav. If using simulation, 
-botanbot_gazebo includes sensor plugins.
+(botanbot_sim)[https://github.com/NMBURobotics/botanbot_sim] is configured use (vox_nav)[https://github.com/NMBURobotics/vox_nav] system for 3D navigation. 
+If you are trying to setup your robot for use with (vox_nav)[https://github.com/NMBURobotics/vox_nav], (botanbot_sim)[https://github.com/NMBURobotics/botanbot_sim] is right place to look for.
+A RQT based gui is also provided in (botanbot_gui)[https://github.com/NMBURobotics/botanbot_sim/tree/main/botanbot_gui],
+through this gui it is possible to send goal commands to action server(NavigateToPose) of vox_nav.
    
