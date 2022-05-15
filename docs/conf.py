@@ -17,8 +17,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'botanbot'
-copyright = '2020, Fetullah Atas, Norwegian University of Life Sciences'
+project = 'botanbot-sim'
+copyright = '2022, Fetullah Atas, Norwegian University of Life Sciences'
 author = 'Fetullah Atas'
 
 master_doc = 'index'
