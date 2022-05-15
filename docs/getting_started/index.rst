@@ -23,62 +23,24 @@ To install ROS2 foxy desktop ;
    sudo apt install ros-foxy-desktop
    source /opt/ros/foxy/setup.bash
 
-* A few helper packages we use for gui and installation;
-
-.. code-block:: bash
-
-   source /opt/ros/foxy/setup.bash
-   sudo apt install python3-colcon-common-extensions
-   sudo apt install -y python3-rosdep2
-   sudo apt-get install python3-vcstool
-   sudo apt-get install xdotool
-   sudo apt-get install coinor-libipopt-dev
-   rosdep update
 
 * Get the project repository, source build deps and build deps first; 
 
 .. code-block:: bash
 
    mkdir -p ~/ros2_ws/src
-   cd ~/ros2_ws
    source /opt/ros/foxy/setup.bash
-   wget https://raw.githubusercontent.com/jediofgever/vox_nav/foxy/underlay.repos
-   vcs import src < underlay.repos     
+   sudo apt install python3-colcon-common-extensions
+   sudo apt install -y python3-rosdep2
+   sudo apt-get install git
+   rosdep update
+   cd ~/ros2_ws/src
+   git clone --recursive https://github.com/NMBURobotics/botanbot_sim.git
+   cd ~/ros2_ws
    rosdep install -y -r -q --from-paths src --ignore-src --rosdistro foxy   
-   colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DWITH_IPOPT=true --packages-select casadi ompl
-   sudo cp install/ompl/lib/libompl.so* /usr/local/lib/
-   sudo cp install/casadi/lib/libcasadi.so* /usr/local/lib/
-   sudo rm -rf src/ompl/
-   sudo rm -rf src/casadi/
-
-There are essentially 2-3 dependency libraries that needs source build. 
-perception_pcl ,OMPL and casadi. The above sript will build and install them and remove the source code as its not needed.
-
-* With above we only built dependencies, now lest build vox_nav itself
-
-.. code-block:: bash
-
-   source /opt/ros/foxy/setup.bash
-   cd ~/ros2_ws
-   colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release --packages-skip-regex archived --packages-skip ompl casadi vox_nav_openvslam
-   source ~/ros2_ws/install/setup.bash
-
-.. note::
-   Pay attention that we have disabled the build of archived_ packages. Some packages(e.g vox_net_openvslam) has quite some 
-   amount of deps. If you like to use please refer to SLAM vox_net_openvslam section , there you will find instructions
-   to install vox_net_openvslam deps. After that you can remove `--packages-skip vox_net_openvslam` part from 
-   colcon build command.
-
-You can update code by vcstool, you can also us classic git pull. 
-
-.. code-block:: bash
-
-   cd ~/ros2_ws
-   vcs import src < underlay.repos
-   vcs pull src
-
+   colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release --parallel-workers 4
 
 .. note::
    If for some reason you could not build vox_nav, a good place to seek for a solution is the github actions file that we have.
-   After each pull-push github actions is setup to build the vox_nav on remote to ensure stability of builds. 
+   After each pull-push github actions is setup to build the botanbot_sim on remote to ensure stability of builds. 
    Find a recent successful build and see the commands in .github/workflows/main.yml. The commands should more or less look as in this page.

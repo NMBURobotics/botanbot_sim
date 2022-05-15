@@ -10,6 +10,8 @@ A project to develop/adapt a navigation system for outdoor robotics particularly
 
 * Botanbot is a Simulated Ackermann robot model for agricultural cases.
  
+Check the side menu on how to install and run Botanbot.
+ 
 This branch(foxy) is aiming for ROS2 Foxy distro. 
 
 .. toctree::
