@@ -7,7 +7,7 @@ It is also a use-case of [vox_nav](https://github.com/jediofgever/vox_nav) 2.5D 
 Refer to [vox_nav](https://github.com/jediofgever/vox_nav) to find out more about vox_nav.
 
 # running botanbot
-Note that the main branch is targeted to ROS2 Foxy version. Yoy can see steps under `botanbot_sim/.github/workflows/main.yml` on how to build botanbot locally. 
+Note that the main branch is targeted to ROS2 Foxy version. You can see steps under `botanbot_sim/.github/workflows/main.yml` on how to build botanbot locally. 
 
 After sucessul build; 
 
